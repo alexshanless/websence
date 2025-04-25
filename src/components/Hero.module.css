@@ -1,0 +1,66 @@
+/* src/components/Hero.module.css */
+
+.heroContainer {
+    min-height: 90vh; /* Make it take up most of the viewport height */
+    display: flex; /* Use flexbox for easy centering */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    padding: 20px; /* Some padding */
+    background-color: #ffffff; /* Or your desired background */
+    overflow: hidden; /* Prevent potential overflow issues with absolute positioning */
+  }
+  
+  .contentWrapper {
+    position: relative; /* Crucial: Allows absolute positioning relative to this */
+    text-align: center; /* Center text within the wrapper (though flex does most work) */
+  }
+  
+  .mainHeadline {
+    font-family: 'Archivo Black', sans-serif; /* Apply the imported font */
+    /* Responsive font size: min 4rem, scales with 18% of viewport width, max 15rem */
+    font-size: clamp(4rem, 18vw, 9rem);
+    text-transform: uppercase; /* Ensure uppercase */
+    color: #1a202c; /* Dark text color */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    line-height: 1; /* Tighten line height for large text */
+    user-select: none; /* Optional: Prevent text selection */
+  }
+  
+  .annotation {
+    position: absolute; /* Position relative to contentWrapper */
+    font-family: 'Inter', sans-serif; /* Use the other font */
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem); /* Small, responsive font size */
+    color: #718096; /* Lighter grey color */
+    white-space: nowrap; /* Prevent text from wrapping */
+    user-select: none; /* Optional: Prevent text selection */
+  }
+  
+  .annotationAbove {
+    top: 0; /* Align to the top of the wrapper */
+    left: 0; /* Align to the left of the wrapper */
+    /* Adjust these transform values to position precisely above the 'W' */
+    /* Negative Y moves it up, Negative X moves it left */
+    transform: translate(-5%, -60%);
+  }
+  
+  .annotationBelow {
+    bottom: 0; /* Align to the bottom of the wrapper */
+    right: 0; /* Align to the right of the wrapper */
+    /* Adjust these transform values to position precisely below the last 'E' */
+    /* Positive Y moves it down, Positive X moves it right */
+    transform: translate(5%, 60%);
+  }
+  
+  /* Optional: Add media queries for fine-tuning on small screens if needed */
+  @media (max-width: 600px) {
+    .mainHeadline {
+      font-size: clamp(3rem, 20vw, 10rem); /* Adjust clamp for smaller screens */
+    }
+    .annotationAbove {
+       transform: translate(-5%, -80%); /* May need different transform on small screens */
+    }
+     .annotationBelow {
+       transform: translate(5%, 80%); /* May need different transform on small screens */
+    }
+  }
