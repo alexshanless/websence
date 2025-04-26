@@ -5,11 +5,32 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif; 
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
+  -moz-osx-font-smoothing: grayscale; 
 }
+
+html, body, #root { min-height: 100%; }
 
 
 .read-the-docs {
   color: #888;
 }
+
+.frame {
+  position: fixed;
+  background-color: #000000; /* Frame color (e.g., black) */
+  z-index: 998; /* Below navbar (999) but above content */
+}
+
+.frame-top {
+  top: 0; left: 0; width: 100%; height: 25px; /* Frame thickness */
+}
+.frame-bottom {
+  bottom: 0; left: 0; width: 100%; height: 25px; /* Frame thickness */
+}
+.frame-left {
+  top: 0; left: 0; width: 25px; /* Frame thickness */ height: 100%;
+}
+.frame-right {
+  top: 0; right: 0; width: 25px; /* Frame thickness */ height: 100%;
+}
+

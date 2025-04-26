@@ -1,14 +1,21 @@
 /* src/components/Hero.module.css */
 
 .heroContainer {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     min-height: 100vh; 
     display: flex; 
-    width:100%;
+    width: 100vw;
     align-items: center; 
     justify-content: center; 
     padding: 20px; 
     background-color: #ffffff; 
     overflow: hidden;
+    background-image: url('https://cdn.prod.website-files.com/65386cac3f64810eb31ba215/65545832d5790dae98f8bf0a_Ellipse%206.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
   }
   
   .contentWrapper {
