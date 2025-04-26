@@ -1,0 +1,79 @@
+
+
+.navbar {
+    position: fixed;
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: auto; 
+    z-index: 999; 
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .navContent {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.65); 
+    padding: 10px 30px; 
+    border-radius: 30px; 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+  }
+  
+  .navMenu {
+    list-style: none; 
+    display: flex; 
+    align-items: center; 
+    margin: 0;
+    padding: 10px;
+    gap: 10px; 
+    background-color: #00000068;
+    border-radius: 16px;
+  }
+  
+  .navLink {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 500; 
+    color: #ffffff; 
+    text-decoration: none;
+    background: none;
+    border: none; 
+    padding: 8px 12px; 
+    cursor: pointer;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, transform 0.1s ease;
+    border-radius: 20px;
+    outline: none !important;
+  }
+
+  .navLink:active {
+    transform: scale(0.96);
+    background-color: rgba(255, 255, 255, 0.1); 
+  }
+  
+  .navLink:hover {
+    color: #eee; /* Slightly dimmed white on hover? */
+    background-color: rgba(255, 255, 255, 0.08); /* Even more subtle background on hover */
+  }
+  
+  .navLink:focus-visible {
+    outline: 2px solid skyblue; /* Or your preferred focus color */
+    outline-offset: 2px; /* Space between element and outline */
+    background-color: rgba(255, 255, 255, 0.1); /* Consistent background */
+  }
+
+  .navLink[href] {
+     display: inline-block; 
+   /* Remove underline from links */}
+
+     .navLink[href]:focus-visible {
+        outline: 2px solid skyblue;
+        outline-offset: 2px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    .navLink[href]:active {
+        transform: scale(0.96);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
