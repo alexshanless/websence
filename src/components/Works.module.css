@@ -7,7 +7,7 @@
   z-index: 2; /* Higher z-index than the Hero section */
   min-height: 100vh; /* Full viewport height */
   width: 100%; /* Full width */
-  overflow: hidden; /* Prevent sliders spilling out */
+  overflow: hidden; 
   display: flex; /* Helps align content if needed */
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
 
 /* --- Background Slider --- */
 .bgSwiper {
-  position: absolute; /* Take it out of flow */
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
@@ -33,16 +33,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover; /* Cover the slide area */
-  /* Optional: Add a subtle overlay */
-  /* filter: brightness(0.7); */
+ 
 }
 
 /* --- Titles Slider --- */
 .textSwiper {
   position: relative; /* Position relative to container */
   z-index: 3; /* Above background */
-  width: 100%; /* Takes full width */
-  overflow: visible !important; /* Allow seeing neighboring slides slightly */
+  width: 100vw; /* Takes full width */
+  overflow: hidden !important; 
   display: flex;
   align-items: center; /* Center title vertically */
   justify-content: center; /* Center title horizontally */
