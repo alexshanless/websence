@@ -1,27 +1,166 @@
 
 
 .worksContainer {
-    background-color: #f8f9fa; 
-    padding: 60px 20px; 
-    position: relative; 
-    z-index: 2; 
-    min-height: 100vh; 
-  }
-  
-  .content {
-    max-width: 1200px; 
-    margin: 0 auto; 
-    text-align: center;
-  }
-  
-  .content h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .content p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 2rem;
-  }
+  background-color: #111; 
+  padding: 0; 
+  position: relative; 
+  z-index: 2; /* Higher z-index than the Hero section */
+  min-height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width */
+  overflow: hidden; /* Prevent sliders spilling out */
+  display: flex; /* Helps align content if needed */
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Background Slider --- */
+.bgSwiper {
+  position: absolute; /* Take it out of flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Lowest layer */
+}
+
+.bgSlide {
+  width: 100%;
+  height: 100%;
+}
+
+.bgImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the slide area */
+  /* Optional: Add a subtle overlay */
+  /* filter: brightness(0.7); */
+}
+
+/* --- Titles Slider --- */
+.textSwiper {
+  position: relative; /* Position relative to container */
+  z-index: 3; /* Above background */
+  width: 100%; /* Takes full width */
+  overflow: visible !important; /* Allow seeing neighboring slides slightly */
+  display: flex;
+  align-items: center; /* Center title vertically */
+  justify-content: center; /* Center title horizontally */
+  height: 80%; /* Adjust height for title positioning */
+}
+
+.textSlide {
+  width: auto !important; /* Let content determine width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.6; /* Non-active slides slightly faded */
+  transition: opacity 0.4s ease;
+}
+
+.textSlide h2 { /* Base style for all titles */
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(3rem, 10vw, 8rem); /* Responsive font size */
+  text-transform: uppercase;
+  color: transparent; /* Make base color transparent */
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8); /* White stroke, slightly transparent */
+          /* text-stroke: 1.5px rgba(255, 255, 255, 0.8); */ /* Standard property */
+  margin: 0 30px; /* Spacing between titles */
+  white-space: nowrap; /* Prevent wrapping */
+  transition: color 0.4s ease, -webkit-text-stroke 0.4s ease;
+}
+
+/* Active Title Slide Styles */
+.textSlide.isActive { /* Use the class assigned by Swiper */
+  opacity: 1;
+}
+
+.textSlide.isActive h2 { /* Styles for the active title */
+  color: white !important; /* Fill with white */
+  -webkit-text-stroke: 0px white !important; /* Remove stroke */
+          /* text-stroke: 0px white !important; */
+}
+
+:global(.swiper-button-next)::after,
+:global(.swiper-button-prev)::after {
+  /* Change the icon color */
+  color: #ffffff; /* White arrows - adjust as needed */
+
+  /* Optional: Add a subtle shadow for better visibility */
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+
+  /* Optional: Slightly increase size */
+  font-size: 1.5rem; /* Default is usually around 44px equivalent */
+}
+/* --- Thumbs Slider --- */
+.thumbsSwiper {
+  position: absolute; 
+  bottom: 40px; 
+  right: 40px; 
+  width: 300px; 
+  height: 100px; 
+  z-index: 4; 
+  overflow: hidden; 
+}
+
+.thumbSlide {
+  width: 100px !important; /* Fixed width for each thumb */
+  height: 70px !important; /* Fixed height */
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden; /* Clip image to rounded corners */
+}
+
+.thumbSlide.thumbIsActive { /* Active thumb style */
+  opacity: 1;
+  /* border: 2px solid white; Optional active border */
+}
+
+.thumbImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* --- Controls / Slide Numbers --- */
+.swiperControls {
+    position: absolute;
+    bottom: 40px; /* Align near thumbs or elsewhere */
+    left: 40px; /* Adjust position */
+    z-index: 5; /* Highest */
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.swiperControls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 10px;
+}
+.swiperControls button:hover {
+    opacity: 0.7;
+}
+
+.slideNumber {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Hide default Swiper nav buttons if using custom ones */
+/*.swiper-button-next,
+.swiper-button-prev {
+    display: none !important;
+}*/

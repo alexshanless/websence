@@ -71,7 +71,6 @@ function App() {
 
   return (
     <>
-      <SiteFrame />
       <Navbar />
       <main>
         <Hero isSticky={isHeroSticky} />
