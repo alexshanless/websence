@@ -73,6 +73,7 @@ function App() {
     <>
       <Navbar />
       <main>
+        <SiteFrame />
         <Hero isSticky={isHeroSticky} />
         <Works />
         <div

@@ -1,5 +1,5 @@
 // src/components/Works.jsx - Phase 1: Basic Background Slider
-import React, { useState } from 'react'; // Removed useState, useEffect for now
+import React, { useState, useEffect } from 'react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -53,8 +53,29 @@ function numberWithZero(num) {
 
 function Works() {
   const [bgSwiper, setBgSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [textSwiper, setTextSwiper] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (
+      textSwiper?.controller &&
+      thumbsSwiper &&
+      !textSwiper.controller.control
+    ) {
+      console.log('Connecting text -> thumbs');
+      textSwiper.controller.control = thumbsSwiper;
+    }
+    if (
+      thumbsSwiper?.controller &&
+      textSwiper &&
+      !thumbsSwiper.controller.control
+    ) {
+      console.log('Connecting thumbs -> text');
+      thumbsSwiper.controller.control = textSwiper;
+    }
+    // Cleanup refs on component unmount maybe? Optional advanced.
+  }, [textSwiper, thumbsSwiper]);
   return (
     <section id='works' className={styles.worksContainer}>
       {/* --- Background Slider --- */}
@@ -77,40 +98,63 @@ function Works() {
         ))}
       </Swiper>
 
-      {
-        <Swiper
-          modules={[Controller, Mousewheel, Keyboard, Thumbs, Navigation]}
-          onSwiper={setTextSwiper}
-          thumbs={{ swiper: bgSwiper && !bgSwiper.destroyed ? bgSwiper : null }}
-          slidesPerView='auto'
-          speed={600}
-          slideToClickedSlide={true}
-          centeredSlides={true}
-          mousewheel={true}
-          keyboard={true}
-          className={styles.textSwiper}
-          slideActiveClass={styles.isActive}
-          onSlideChange={swiper => {
-            console.log('Text Swiper activeIndex:', swiper.activeIndex);
-            setCurrentIndex(swiper.activeIndex);
-          }}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }}
-        >
-          {projects.map(project => (
-            <SwiperSlide
-              key={`text-${project.id}`}
-              className={styles.textSlide}
-            >
-              <h2 className={styles.slideTitleHeading}>{project.title}</h2>
-            </SwiperSlide>
-          ))}
-          <div className='swiper-button-prev'></div>
-          <div className='swiper-button-next'></div>
-        </Swiper>
-      }
+      {/* --- Titles Slider --- */}
+      <Swiper
+        modules={[Controller, Mousewheel, Keyboard, Thumbs, Navigation]}
+        onSwiper={setTextSwiper}
+        thumbs={{ swiper: bgSwiper && !bgSwiper.destroyed ? bgSwiper : null }}
+        slidesPerView='auto'
+        speed={600}
+        slideToClickedSlide={true}
+        centeredSlides={true}
+        mousewheel={true}
+        keyboard={true}
+        className={styles.textSwiper}
+        slideActiveClass={styles.isActive}
+        onTransitionEnd={swiper => {
+          console.log('Transition Ended. Forcing update.');
+          swiper.update();
+        }}
+        onSlideChange={swiper => {
+          setCurrentIndex(swiper.activeIndex);
+        }}
+        navigation={{
+          nextEl: `.${styles.swiperNext}`,
+          prevEl: `.${styles.swiperPrev}`,
+        }}
+      >
+        {projects.map(project => (
+          <SwiperSlide key={`text-${project.id}`} className={styles.textSlide}>
+            <h2 className={styles.slideTitleHeading}>{project.title}</h2>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <Swiper
+        modules={[Controller, Thumbs]}
+        onSwiper={setThumbsSwiper}
+        // controller={textSwiper ? { control: textSwiper } : undefined} // Comment out if causing issues, rely on useEffect
+        watchSlidesProgress={true}
+        slidesPerView={3}
+        spaceBetween={10}
+        centeredSlides={true}
+        slideToClickedSlide={true}
+        className={styles.thumbsSwiper}
+        slideActiveClass={styles.isActive}
+      >
+        {projects.map(project => (
+          <SwiperSlide
+            key={`thumb-${project.id}`}
+            className={styles.thumbSlide}
+          >
+            <img
+              src={project.bgImage}
+              alt={`${project.title} Thumbnail`}
+              className={styles.thumbImage}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/* --- Controls / Slide Numbers --- */}
       <div className={styles.swiperControls}>
@@ -122,6 +166,15 @@ function Works() {
           <span className={styles.swiperNumberTotal}>
             {numberWithZero(projects.length)}
           </span>
+        </div>
+        <div className={styles.navButtonsContainer}>
+          {/* Add the specific classes for Swiper to find */}
+          <button className={`${styles.swiperPrev} ${styles.navButton}`}>
+            Prev
+          </button>
+          <button className={`${styles.swiperNext} ${styles.navButton}`}>
+            Next
+          </button>
         </div>
       </div>
     </section>

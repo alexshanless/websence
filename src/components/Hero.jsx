@@ -17,7 +17,6 @@ function Hero({ isSticky }) {
           a web <br></br> design agency
         </span>
       </div>
-      Hero
     </section>
   );
 }

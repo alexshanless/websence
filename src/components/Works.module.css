@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0.6; /* Non-active slides slightly faded */
+  opacity: 1; /* Non-active slides slightly faded */
   transition: opacity 0.4s ease;
 }
 
@@ -71,20 +71,18 @@
 }
 
 /* Active Title Slide Styles */
-.textSlide.isActive { /* Use the class assigned by Swiper */
+.textSwiper.isActive { /* Use the class assigned by Swiper */
   opacity: 1;
 }
 
-.textSlide.isActive h2 { /* Styles for the active title */
-  color: white !important; /* Fill with white */
-  -webkit-text-stroke: 0px white !important; /* Remove stroke */
-          /* text-stroke: 0px white !important; */
+/* Active Title Slide Styles */
+.textSlide.isActive h2 {
+  color: white !important;
+  -webkit-text-stroke: 0px white !important;
 }
-
 :global(.swiper-button-next)::after,
 :global(.swiper-button-prev)::after {
-  /* Change the icon color */
-  color: #ffffff; /* White arrows - adjust as needed */
+  color: #ffffff; 
 
   /* Optional: Add a subtle shadow for better visibility */
   text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
@@ -107,7 +105,7 @@
   width: 100px !important; /* Fixed width for each thumb */
   height: 70px !important; /* Fixed height */
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 1;
   transition: opacity 0.3s ease;
   border-radius: 8px;
   overflow: hidden; /* Clip image to rounded corners */
@@ -129,17 +127,33 @@
 /* --- Controls / Slide Numbers --- */
 .swiperControls {
     position: absolute;
-    bottom: 40px; /* Align near thumbs or elsewhere */
-    left: 40px; /* Adjust position */
-    z-index: 5; /* Highest */
+    bottom: 40px; 
+    left: 40px;  
+    z-index: 5;
     display: flex;
+    
+    flex-direction: column;
     align-items: center;
+    gap: 10px; 
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 5px 15px;
+    padding: 15px 20px;
     border-radius: 20px;
-    color: white;
 }
 
+.swiperPrev {
+  color:white;
+  /* This class is just a hook for Swiper's JS */
+}
+.swiperNext {
+  color:white;
+  /* This class is just a hook for Swiper's JS */
+}
+
+.slideNumber {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+}
 .swiperControls button {
     background: none;
     border: none;
@@ -158,8 +172,25 @@
     font-size: 0.9rem;
 }
 
-/* Hide default Swiper nav buttons if using custom ones */
-/*.swiper-button-next,
-.swiper-button-prev {
-    display: none !important;
-}*/
+.navButtonsContainer {
+  display: flex;
+  gap: 15px; /* Space between Prev and Next buttons */
+}
+
+.navButton { /* This is the generic class we added */
+    background: none;
+    color: white;
+    font-size: 0.8rem; /* Can make them smaller */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 10px; /* Pill shape */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navButton:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+}
+
