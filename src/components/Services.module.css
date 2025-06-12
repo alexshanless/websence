@@ -1,0 +1,104 @@
+.services {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.serviceItem {
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.serviceTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2rem, 9vw, 5rem);
+  text-transform: uppercase;
+  color: #1a202c;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.serviceItem:hover .serviceTitle {
+  color: #666;
+}
+
+.tooltip {
+  position: absolute;
+  top: -40%;
+  left: 60%;
+  transform: translate(20px, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-out;
+}
+
+
+
+.subServicesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.subServiceItem {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.separator {
+  color: white;
+  opacity: 0.7;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(20px, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(20px, -50%) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 3rem;
+  }
+  
+  .tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+  }
+  
+  .tooltip::before {
+    display: none;
+  }
+}
