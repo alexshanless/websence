@@ -2,6 +2,7 @@ import './App.css';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import Works from './components/Works';
+import Services from './components/Services';
 import React, { useState, useRef, useEffect } from 'react';
 
 const PlaceholderSection = ({ id, title, minHeight = '70vh' }) => (
@@ -82,7 +83,7 @@ function App() {
         ></div>
       </main>
 
-      <PlaceholderSection id='services' title='Services' />
+      <Services />
       <PlaceholderSection id='about' title='About' />
     </>
   );
