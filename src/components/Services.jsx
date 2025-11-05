@@ -1,3 +1,30 @@
+<<<<<<< HEAD
+import React from 'react';
+import styles from './Services.module.css';
+
+const servicesData = [
+  {
+    name: 'Web Design',
+    subServices: ['UI Design', 'UX Strategy', 'Brand Identity', 'Prototyping'],
+  },
+  {
+    name: 'Web Development',
+    subServices: ['Webflow', 'React.js', 'SEO', 'Performance Opt.'],
+  },
+  {
+    name: 'Project Management',
+    subServices: [
+      'Client Communication',
+      'Timeline Planning',
+      'Quality Assurance',
+    ],
+  },
+];
+
+function Services() {
+  return <div>Services</div>;
+}
+=======
 import React, { useState } from 'react';
 import styles from './Services.module.css';
 
@@ -54,5 +81,6 @@ const Services = () => {
     </section>
   );
 };
+>>>>>>> 8d1032a56aab7a0d9d7f5885e2df8eb18193e01b
 
 export default Services;
