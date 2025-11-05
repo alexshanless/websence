@@ -15,7 +15,7 @@
     background-image: url('https://cdn.prod.website-files.com/65386cac3f64810eb31ba215/65545832d5790dae98f8bf0a_Ellipse%206.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
   }
   
   .contentWrapper {

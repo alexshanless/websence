@@ -1,0 +1,126 @@
+.contact {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  background-color: #000;
+  border-top: 1px solid #222;
+  position: relative;
+}
+
+.backgroundText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(4rem, 15vw, 12rem);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaSection {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.headline {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  user-select: none;
+}
+
+.subheadline {
+  font-family: 'Roboto', sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #999;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  padding: 1.25rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input:focus {
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.submitButton {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1.25rem 3rem;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 20px;
+  }
+
+  .ctaSection {
+    margin-bottom: 3rem;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}
