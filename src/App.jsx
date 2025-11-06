@@ -88,8 +88,9 @@ function App() {
 			</main>
 
 			<About />
-			<AllProjects />
 			<Services />
+			<AllProjects />
+
 			<Contact />
 			<Footer />
 		</>
