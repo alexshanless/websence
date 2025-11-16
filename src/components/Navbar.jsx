@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './Navbar.module.css';
 
 function Navbar() {
+  const [isVisible, setIsVisible] = useState(true);
+  const navRef = useRef(null);
+
   const handleScrollTo = sectionId => {
     const element = document.getElementById(sectionId);
     console.log(`Attempting to scroll to: ${sectionId}`, element); // Add console log for debugging
@@ -10,13 +13,40 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Hide navbar when footer is intersecting with viewport
+        setIsVisible(!entry.isIntersecting);
+      },
+      {
+        root: null,
+        // Add bottom margin to detect footer earlier (adjust as needed)
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0,
+      }
+    );
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      observer.observe(footer);
+    }
+
+    return () => {
+      if (footer) {
+        observer.unobserve(footer);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
   const navItems = [
     { id: 'hero', label: 'Home' }, // Assuming your Hero section has id="hero"
     { id: 'services', label: 'Services' },
     { id: 'about', label: 'About' },
   ];
   return (
-    <nav className={styles.navbar}>
+    <nav ref={navRef} className={`${styles.navbar} ${!isVisible ? styles.hidden : ''}`}>
       <div className={styles.navConent}>
         <ul className={styles.navMenu}>
           {navItems.map(item => (

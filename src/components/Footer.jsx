@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -52,9 +53,9 @@ const Footer = () => {
             © {currentYear} WEBSENCE. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
-            <a href='#' className={styles.legalLink}>Privacy Policy</a>
+            <Link to='/privacy-policy' className={styles.legalLink}>Privacy Policy</Link>
             <span className={styles.separator}>|</span>
-            <a href='#' className={styles.legalLink}>Terms of Service</a>
+            <Link to='/terms-of-service' className={styles.legalLink}>Terms of Service</Link>
           </div>
         </div>
       </div>

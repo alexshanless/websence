@@ -7,7 +7,10 @@ import About from './components/About';
 import AllProjects from './components/AllProjects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import React, { useState, useRef, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const PlaceholderSection = ({ id, title, minHeight = '70vh' }) => (
 	<section
@@ -35,37 +38,27 @@ const SiteFrame = () => (
 	</>
 );
 
-function App() {
+const HomePage = () => {
 	const [isHeroSticky, setIsHeroSticky] = useState(true);
-
 	const worksEndRef = useRef(null);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				// isIntersecting is true if the trigger element is visible
-				// We want the Hero to be sticky WHILE the trigger IS visible
-				// (meaning Works hasn't scrolled completely off screen yet)
-				console.log(
-					'Observer triggered, isIntersecting:',
-					entry.isIntersecting
-				);
 				setIsHeroSticky(entry.isIntersecting);
 			},
 			{
-				root: null, // Observe relative to the viewport
-				rootMargin: '0px', // No margin
-				threshold: 0, // Trigger as soon as 1px is visible/invisible
+				root: null,
+				rootMargin: '0px',
+				threshold: 0,
 			}
 		);
 
-		// Start observing the trigger element if it exists
 		const currentRef = worksEndRef.current;
 		if (currentRef) {
 			observer.observe(currentRef);
 		}
 
-		// Cleanup: disconnect observer when component unmounts
 		return () => {
 			if (currentRef) {
 				observer.unobserve(currentRef);
@@ -76,7 +69,6 @@ function App() {
 
 	return (
 		<>
-			<Navbar />
 			<main>
 				<SiteFrame />
 				<Hero isSticky={isHeroSticky} />
@@ -86,14 +78,25 @@ function App() {
 					style={{ height: '1px', pointerEvents: 'none' }}
 				></div>
 			</main>
-
-			<About />
 			<Services />
+			<About />
 			<AllProjects />
-
 			<Contact />
-			<Footer />
 		</>
+	);
+};
+
+function App() {
+	return (
+		<Router>
+			<Navbar />
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+				<Route path="/terms-of-service" element={<TermsOfService />} />
+			</Routes>
+			<Footer />
+		</Router>
 	);
 }
 

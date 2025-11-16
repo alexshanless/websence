@@ -23,27 +23,23 @@ import styles from './Works.module.css';
 const projects = [
   {
     id: 1,
-    title: 'Project Alpha',
-    bgImage:
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    title: 'JNA',
+    bgImage: '/assets/screenshots/JNA-slide.jpg',
   },
   {
     id: 2,
-    title: 'Beta Creations',
-    bgImage:
-      'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    title: 'EMBR',
+    bgImage: '/assets/screenshots/embr-slider.jpg',
   },
   {
     id: 3,
-    title: 'Gamma Solutions',
-    bgImage:
-      'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    title: 'TXP',
+    bgImage: '/assets/screenshots/txp-slide.jpg',
   },
   {
     id: 4,
-    title: 'Delta Innovations',
-    bgImage:
-      'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
+    title: 'CS MEDIA',
+    bgImage: '/assets/screenshots/c.smedia-slide.jpg',
   },
 ];
 
