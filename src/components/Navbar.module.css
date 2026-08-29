@@ -94,48 +94,153 @@
     }
   /* The four items wrapped into a vertical stack on small screens, which
      turned the pill into a blob. Keep them on one row and shrink instead. */
-  @media (max-width: 600px) {
-    .navbar {
-      /* Clear of the very bottom edge, and inside the 25px frame. */
-      bottom: 16px;
-      left: 12px;
-      right: 12px;
-      transform: none;
-      width: auto;
-    }
 
-    .navbar.hidden {
-      transform: translateY(20px);
-    }
+/* ---------- mobile drawer ---------- */
 
-    .navContent {
-      max-width: 100%;
-      width: 100%;
-      padding: 6px 8px;
-      justify-content: center;
-    }
+/* Button and drawer are desktop-hidden; the floating pill covers desktop. */
+.menuButton {
+  display: none;
+}
 
-    .navMenu {
-      flex-wrap: nowrap;
-      gap: 0;
-      width: 100%;
-      justify-content: space-between;
-    }
+.drawer {
+  display: none;
+}
 
-    .navItem {
-      flex: 1 1 0;
-      display: flex;
-    }
-
-    .navLink {
-      /* 44px minimum tap target. Measured 31px before. */
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      font-size: 0.84rem;
-      padding: 8px 4px;
-      white-space: nowrap;
-    }
+@media (max-width: 700px) {
+  /* The bottom pill is an app tab bar convention. On the web a button and a
+     drawer is what people expect, so the pill is dropped on small screens. */
+  .navbar {
+    display: none;
   }
+
+  .menuButton {
+    position: fixed;
+    top: 14px;
+    right: 12px;
+    z-index: 1001;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background-color: rgba(18, 20, 26, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .menuButton:focus-visible {
+    outline: 2px solid skyblue;
+    outline-offset: 2px;
+  }
+
+  .menuLabel {
+    line-height: 1;
+  }
+
+  /* Two bars that cross into an X when open. */
+  .burger {
+    position: relative;
+    width: 16px;
+    height: 10px;
+    flex-shrink: 0;
+  }
+
+  .burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: transform 0.25s ease, top 0.25s ease;
+  }
+
+  .burger span:first-child {
+    top: 0;
+  }
+
+  .burger span:last-child {
+    top: 8px;
+  }
+
+  .burgerOpen span:first-child {
+    top: 4px;
+    transform: rotate(45deg);
+  }
+
+  .burgerOpen span:last-child {
+    top: 4px;
+    transform: rotate(-45deg);
+  }
+
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(10, 12, 16, 0.97);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .drawerOpen {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .drawerMenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .drawerLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0.5rem 2rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .drawerActive {
+    color: #fff;
+  }
+
+  .drawerLink:focus-visible {
+    outline: 2px solid skyblue;
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .burger span {
+    transition: none;
+  }
+}

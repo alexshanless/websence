@@ -85,7 +85,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .legalPage {
-    padding: 80px 36px 60px;
+    padding: 80px 20px 60px;
   }
 
   .title {
@@ -98,5 +98,11 @@
 
   .section ul {
     margin-left: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .legalPage {
+    padding: 80px 20px 60px;
   }
 }

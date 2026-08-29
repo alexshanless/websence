@@ -197,7 +197,7 @@
   .footer {
     /* Extra bottom room so the floating nav pill never sits on the legal
        links while the footer is the last thing on screen. */
-    padding: 48px 24px 40px;
+    padding: 48px 20px 40px;
   }
 
   .topSection {

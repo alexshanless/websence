@@ -440,11 +440,11 @@
 
 @media (max-width: 600px) {
   .intro {
-    padding: 80px 36px 70px;
+    padding: 80px 20px 70px;
   }
 
   .studio {
-    padding: 64px 36px;
+    padding: 64px 20px;
   }
 
   /* One column, but the cards stay identical to each other. */
@@ -455,7 +455,7 @@
   }
 
   .pitch {
-    padding: 90px 36px 110px;
+    padding: 90px 20px 110px;
   }
 
   .outcome {

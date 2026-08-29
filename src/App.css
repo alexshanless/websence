@@ -17,3 +17,12 @@
   top: 0; right: 0; width: 25px; /* Frame thickness */ height: 100%;
 }
 
+
+/* The decorative frame is a desktop device. On a phone it costs 50px of the
+   390px viewport, crowds the fixed nav and back chip, and reads as a heavy
+   border rather than a frame. */
+@media (max-width: 700px) {
+  .frame {
+    display: none;
+  }
+}

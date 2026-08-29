@@ -52,7 +52,7 @@
   .annotationAbove {
     top: 0;
     left: 0;
-    transform: translate(-5%, -60%);
+    transform: translate(-5%, calc(-100% - 10px));
   }
 
   /* Both lines align on their right edge, under the full stop.
@@ -63,7 +63,7 @@
     right: 0;
     text-align: right;
     line-height: 1.5;
-    transform: translate(5%, 60%);
+    transform: translate(5%, calc(100% + 10px));
   }
 
   /* "WEBSENCE." is one unbreakable word, so its size is capped by the
@@ -88,10 +88,10 @@
     }
 
     .annotationAbove {
-      transform: translate(0, -70%);
+      transform: translate(0, calc(-100% - 8px));
     }
 
     .annotationBelow {
-      transform: translate(0, 70%);
+      transform: translate(0, calc(100% + 8px));
     }
   }
