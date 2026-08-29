@@ -1,0 +1,29 @@
+.nap {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Names the nearby towns without needing a page for each one. */
+.serviceArea {
+  margin-top: 0.6rem;
+  opacity: 0.85;
+}

@@ -6,6 +6,7 @@
   position: relative; 
   z-index: 2; /* Higher z-index than the Hero section */
   min-height: 100vh; /* Full viewport height */
+  height: 100vh;
   width: 100%; /* Full width */
   overflow: hidden; 
   display: flex; /* Helps align content if needed */
@@ -15,7 +16,7 @@
 
 /* --- Background Slider --- */
 .bgSwiper {
-  position: absolute; 
+  position: absolute !important;
   top: 0;
   left: 0;
   width: 100%;
@@ -38,47 +39,40 @@
 
 /* --- Titles Slider --- */
 .textSwiper {
-  position: relative; /* Position relative to container */
-  z-index: 3; /* Above background */
-  width: 100vw; /* Takes full width */
-  overflow: hidden !important; 
-  display: flex;
-  align-items: center; /* Center title vertically */
-  justify-content: center; /* Center title horizontally */
-  height: 80%; /* Adjust height for title positioning */
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  overflow: hidden !important;
 }
 
 .textSlide {
-  width: auto !important; /* Let content determine width */
+  width: auto !important;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 1; /* Non-active slides slightly faded */
+  opacity: 1;
   transition: opacity 0.4s ease;
 }
 
-.textSlide h2 { /* Base style for all titles */
+.textSlide h2 {
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(3rem, 10vw, 8rem); /* Responsive font size */
+  font-size: clamp(3rem, 10vw, 8rem);
   text-transform: uppercase;
-  color: transparent; /* Make base color transparent */
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8); /* White stroke, slightly transparent */
-          /* text-stroke: 1.5px rgba(255, 255, 255, 0.8); */ /* Standard property */
-  margin: 0 30px; /* Spacing between titles */
-  white-space: nowrap; /* Prevent wrapping */
-  transition: color 0.4s ease, -webkit-text-stroke 0.4s ease;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+  margin: 0;
+  padding: 0 30px;
+  white-space: nowrap;
+  transition: color 0.4s ease, -webkit-text-fill-color 0.4s ease, -webkit-text-stroke 0.4s ease;
 }
 
-/* Active Title Slide Styles */
-.textSwiper.isActive { /* Use the class assigned by Swiper */
-  opacity: 1;
-}
-
-/* Active Title Slide Styles */
+.textSlide:global(.swiper-slide-active) h2,
 .textSlide.isActive h2 {
-  color: white !important;
-  -webkit-text-stroke: 0px white !important;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke: 0px transparent;
 }
 :global(.swiper-button-next)::after,
 :global(.swiper-button-prev)::after {
@@ -92,7 +86,7 @@
 }
 /* --- Thumbs Slider --- */
 .thumbsSwiper {
-  position: absolute; 
+  position: absolute !important;
   bottom: 40px; 
   right: 40px; 
   width: 300px; 
@@ -150,7 +144,7 @@
 }
 
 .slideNumber {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
     color: white;
 }
@@ -168,7 +162,7 @@
 }
 
 .slideNumber {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
 }
 

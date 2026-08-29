@@ -1,0 +1,257 @@
+.quote {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  margin-bottom: 0.6rem;
+  padding: 0;
+}
+
+.optional {
+  letter-spacing: 0.08em;
+  color: #6b6b6b;
+  text-transform: none;
+}
+
+.input {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: #1a202c;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 0.65rem 0;
+  outline: none;
+  width: 100%;
+  border-radius: 0;
+}
+
+.input:focus {
+  border-bottom-color: #1a202c;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.group {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.choice,
+.addOn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.addOnList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #eee;
+}
+
+.addOn {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 0.75rem;
+}
+
+.addOnName {
+  flex-grow: 1;
+}
+
+.addOnPrice {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  white-space: nowrap;
+}
+
+/* ---------- estimate ---------- */
+
+.estimate {
+  border: 2px solid #1a202c;
+  padding: 1.75rem;
+}
+
+.estimateLabel {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  margin: 0 0 1rem;
+}
+
+.estimateValue {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.05;
+  color: #1a202c;
+  margin: 0;
+}
+
+.estimatePrefix {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  margin-bottom: 0.35rem;
+}
+
+.estimateMonthly {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0.6rem 0 0;
+}
+
+.estimateEmpty {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #6b6b6b;
+  margin: 0;
+}
+
+.estimateNote {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #666;
+  margin: 0.75rem 0 0;
+}
+
+.estimateQualifier {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 1.25rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid #ddd;
+}
+
+/* ---------- side column ---------- */
+
+.side {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.submit {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #1a202c;
+  border: 2px solid #1a202c;
+  padding: 1.1rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.submit:hover:not(:disabled) {
+  background-color: transparent;
+  color: #1a202c;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.success,
+.error {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.success {
+  color: #1a202c;
+}
+
+.error {
+  color: #b42318;
+}
+
+@media (max-width: 900px) {
+  .quote {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .side {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Honeypot. Off-screen rather than display:none — some bots skip anything
+   that is not rendered, and this must look fillable to them. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

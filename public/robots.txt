@@ -1,0 +1,11 @@
+# Everything is indexable except build previews and staging hosts.
+User-agent: *
+Allow: /
+
+# Preview and staging deployments. These paths do not exist in production;
+# the rules are here so a preview host never gets indexed if one is added.
+Disallow: /preview/
+Disallow: /staging/
+Disallow: /draft/
+
+Sitemap: https://websencestudio.com/sitemap.xml

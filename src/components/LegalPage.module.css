@@ -1,12 +1,29 @@
 .legalPage {
   min-height: 100vh;
-  padding: 100px 20px 80px;
+  padding: 100px 36px 64px;
   background-color: #fff;
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  color: #949494;
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.backLink:hover {
+  color: #1a202c;
+}
+
+.section a {
+  color: #1a202c;
 }
 
 .title {
@@ -21,7 +38,7 @@
 .lastUpdated {
   font-family: 'Roboto', sans-serif;
   font-size: 0.875rem;
-  color: #666;
+  color: #949494;
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -68,7 +85,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .legalPage {
-    padding: 80px 20px 60px;
+    padding: 80px 36px 60px;
   }
 
   .title {

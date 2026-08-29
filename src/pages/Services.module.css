@@ -1,0 +1,74 @@
+.services {
+  background-color: #fff;
+}
+
+/* The opening band carries the page's own top padding, so the shared .page
+   bottom padding is dropped where a dark band follows immediately. */
+.intro {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.also {
+  margin-top: 3rem;
+  padding-bottom: 90px;
+}
+
+/* Same ground, same rhythm and the same 1100px measure as the home page
+   pricing section, so the two read as one site rather than two templates. */
+.pricing {
+  background-color: #000;
+  color: #fff;
+  padding: 110px 36px 120px;
+}
+
+.pricingInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #949494;
+  margin: 0 0 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.pricingHeading {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0 0 1.25rem;
+  overflow-wrap: break-word;
+}
+
+.pricingSubhead {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #949494;
+  margin: 0 0 3rem;
+  max-width: 44rem;
+}
+
+.closing {
+  min-height: 0;
+  padding-top: 0;
+}
+
+@media (max-width: 600px) {
+  .pricing {
+    padding: 72px 36px 80px;
+  }
+
+  .also {
+    padding-bottom: 60px;
+  }
+}

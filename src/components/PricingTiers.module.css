@@ -1,0 +1,619 @@
+.pricing {
+  width: 100%;
+}
+
+.tierGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.75rem 2.25rem;
+  border: 1px solid;
+  min-width: 0;
+}
+
+/* Starter is the visual default. Nothing marks Standard as "most popular". */
+.tierDefault {
+  border-width: 2px;
+}
+
+.tierName {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.75rem;
+}
+
+.price {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+}
+
+.prefix {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.suffix {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.includes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+/* The Care Plan sits in a full-width strip, so its list can take two columns.
+   The tier cards are narrow and stay single column. */
+.carePlanIncludes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+}
+
+.include {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding: 0.6rem 0 0.6rem 1.1rem;
+  position: relative;
+}
+
+.include::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: 5px;
+  height: 5px;
+}
+
+.revisions {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid;
+}
+
+.carePlan {
+  margin-top: 1.5rem;
+  padding: 1.75rem;
+  border: 1px solid;
+  display: grid;
+  grid-template-columns: minmax(200px, 280px) 1fr;
+  gap: 1.5rem 2.5rem;
+  align-items: start;
+}
+
+.carePlanHead .price {
+  margin: 0;
+}
+
+.carePlanIncludes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+}
+
+.timeline {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  text-transform: uppercase;
+  line-height: 1.35;
+  margin: 2.5rem 0 0;
+}
+
+.qualifier {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+  max-width: 46rem;
+}
+
+/* ---------- light ---------- */
+
+.light .tier,
+.light .carePlan {
+  border-color: #ddd;
+  background-color: #fff;
+}
+
+.light .tierDefault {
+  border-color: #1a202c;
+}
+
+.light .tierName,
+.light .price,
+.light .timeline {
+  color: #1a202c;
+}
+
+.light .prefix,
+.light .suffix {
+  color: #6b6b6b;
+}
+
+.light .include {
+  color: #444;
+}
+
+.light .include::before {
+  background-color: #1a202c;
+}
+
+.light .revisions {
+  color: #666;
+  border-top-color: #ddd;
+}
+
+.light .qualifier {
+  color: #666;
+}
+
+/* ---------- dark ---------- */
+
+.dark .tier,
+.dark .carePlan {
+  border-color: #333;
+  background-color: #0a0a0a;
+}
+
+.dark .tierDefault {
+  border-color: #fff;
+}
+
+.dark .tierName,
+.dark .price,
+.dark .timeline {
+  color: #fff;
+}
+
+.dark .prefix,
+.dark .suffix {
+  color: #888;
+}
+
+.dark .include {
+  color: #bbb;
+}
+
+.dark .include::before {
+  background-color: #fff;
+}
+
+.dark .revisions {
+  color: #888;
+  border-top-color: #333;
+}
+
+.dark .qualifier {
+  color: #888;
+}
+
+@media (max-width: 900px) {
+  .tierGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .carePlan {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1.25rem;
+  }
+}
+
+/* ---------- add-ons ---------- */
+
+.addOns {
+  margin-top: 3rem;
+}
+
+.addOnsTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 1.25rem;
+}
+
+.addOnList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid;
+}
+
+.addOn {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) auto;
+  gap: 0.35rem 2rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid;
+}
+
+.addOnName {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.addOnPrice {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.addOnDescription {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  grid-column: 1 / -1;
+}
+
+.quoteLink {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid;
+}
+
+.light .addOnsTitle,
+.light .addOnName {
+  color: #1a202c;
+}
+
+.light .addOnList,
+.light .addOn {
+  border-color: #ddd;
+}
+
+.light .addOnPrice {
+  color: #666;
+}
+
+.light .addOnDescription {
+  color: #444;
+}
+
+.light .quoteLink {
+  color: #1a202c;
+  border-bottom-color: #1a202c;
+}
+
+.dark .addOnsTitle,
+.dark .addOnName {
+  color: #fff;
+}
+
+.dark .addOnList,
+.dark .addOn {
+  border-color: #333;
+}
+
+.dark .addOnPrice {
+  color: #888;
+}
+
+.dark .addOnDescription {
+  color: #bbb;
+}
+
+.dark .quoteLink {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .quoteLink:hover {
+  border-bottom-color: #fff;
+}
+
+@media (max-width: 600px) {
+  .addOn {
+    grid-template-columns: 1fr;
+  }
+
+  .addOnPrice {
+    text-align: left;
+  }
+}
+
+/* ---------- secondary product (Single Page) ---------- */
+
+/* Deliberately lighter than the three tiers above: no heavy border, smaller
+   price, muted ground. It is a secondary product, not a fourth option of
+   equal weight, and never a "deal". */
+.secondary {
+  margin-top: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px dashed;
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: 1.25rem 2.5rem;
+  align-items: start;
+}
+
+.secondaryName {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem;
+}
+
+.secondaryPrice {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.1;
+  margin: 0 0 0.6rem;
+}
+
+.secondaryPositioning {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.secondaryIncludes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+}
+
+.secondaryIncludes .include {
+  font-size: 0.86rem;
+  padding: 0.35rem 0 0.35rem 1.1rem;
+}
+
+.secondaryIncludes .include::before {
+  top: 0.85rem;
+  width: 4px;
+  height: 4px;
+}
+
+.secondaryExcludes {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 1rem 0 0;
+}
+
+.secondaryExcludesLabel {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.secondaryUpgrade {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 0.85rem 0 0;
+}
+
+.light .secondary {
+  border-color: #ccc;
+  background-color: #fafafa;
+}
+
+.light .secondaryName,
+.light .secondaryPrice {
+  color: #1a202c;
+}
+
+.light .secondaryPositioning,
+.light .secondaryUpgrade {
+  color: #555;
+}
+
+.light .secondaryExcludes {
+  color: #666;
+}
+
+.light .secondaryExcludesLabel {
+  color: #6b6b6b;
+}
+
+.dark .secondary {
+  border-color: #3a3a3a;
+  background-color: #060606;
+}
+
+.dark .secondaryName,
+.dark .secondaryPrice {
+  color: #e6e6e6;
+}
+
+.dark .secondaryPositioning,
+.dark .secondaryUpgrade {
+  color: #999;
+}
+
+.dark .secondaryExcludes {
+  color: #888;
+}
+
+.dark .secondaryExcludesLabel {
+  color: #949494;
+}
+
+@media (max-width: 900px) {
+  .secondary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .secondaryIncludes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- care plan terms + home line ---------- */
+
+.carePlanIncludes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+}
+
+/* Terms sit with the product, never in a footer. */
+.terms {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid;
+}
+
+.term {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+
+.carePlanNote {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin: 1rem 0 0;
+}
+
+.carePlanExcludes {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 1rem 0 0;
+}
+
+.secondaryPrefix {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Home page: the Care Plan gets one line, nothing more. */
+.carePlanLine {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid;
+}
+
+.light .terms {
+  border-top-color: #ddd;
+}
+
+.light .term {
+  color: #444;
+}
+
+.light .carePlanNote,
+.light .carePlanExcludes {
+  color: #555;
+}
+
+.light .carePlanLine {
+  color: #444;
+  border-top-color: #ddd;
+}
+
+.light .secondaryPrefix {
+  color: #6b6b6b;
+}
+
+.dark .terms {
+  border-top-color: #333;
+}
+
+.dark .term {
+  color: #bbb;
+}
+
+.dark .carePlanNote,
+.dark .carePlanExcludes {
+  color: #999;
+}
+
+.dark .carePlanLine {
+  color: #999;
+  border-top-color: #333;
+}
+
+.dark .secondaryPrefix {
+  color: #949494;
+}
+
+@media (max-width: 700px) {
+  .carePlanIncludes {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tierBody {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.light .tierBody {
+  color: #444;
+}
+
+.dark .tierBody {
+  color: #bbb;
+}

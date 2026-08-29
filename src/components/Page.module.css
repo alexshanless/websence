@@ -1,0 +1,414 @@
+.page {
+  min-height: 100vh;
+  padding: 120px 36px 72px;
+}
+
+.light {
+  background-color: #fff;
+  color: #1a202c;
+}
+
+.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---------- page head ---------- */
+
+.kicker {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.light .kicker {
+  border-bottom: 1px solid #ddd;
+}
+
+.dark .kicker {
+  border-bottom: 1px solid #333;
+}
+
+.headline {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.75rem, 6vw, 4.5rem);
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin: 0 0 1.75rem;
+  max-width: 18ch;
+}
+
+.lede {
+  font-family: 'Roboto', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.6;
+  max-width: 40rem;
+  margin: 0;
+}
+
+.body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+.light .lede {
+  color: #333;
+}
+
+.dark .lede {
+  color: #ddd;
+}
+
+.light .body {
+  color: #444;
+}
+
+.dark .body {
+  color: #bbb;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ---------- sections ---------- */
+
+.section {
+  margin: 5rem 0;
+  padding-top: 2.5rem;
+}
+
+.light .section {
+  border-top: 1px solid #e2e2e2;
+}
+
+.dark .section {
+  border-top: 1px solid #333;
+}
+
+.sectionTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin: 0 0 1.5rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.8;
+}
+
+/* ---------- numbered card grid ---------- */
+
+.numGrid {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+}
+
+.light .numGrid {
+  background-color: #e2e2e2;
+  border: 1px solid #e2e2e2;
+}
+
+.dark .numGrid {
+  background-color: #333;
+  border: 1px solid #333;
+}
+
+.numItem {
+  padding: 2.25rem 2rem 2.5rem;
+}
+
+.light .numItem {
+  background-color: #fff;
+}
+
+.dark .numItem {
+  background-color: #000;
+}
+
+.numNum {
+  display: block;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.light .numNum {
+  color: #bbb;
+}
+
+.dark .numNum {
+  color: #949494;
+}
+
+.numTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+
+.numBody {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.light .numBody {
+  color: #555;
+}
+
+.dark .numBody {
+  color: #999;
+}
+
+/* ---------- services hub rows ---------- */
+
+.linkList {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+}
+
+.hubItem {
+  margin: 0;
+}
+
+.hubRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.25rem 1.25rem 2.25rem 0;
+  text-decoration: none;
+  color: inherit;
+  border-top: 2px solid currentColor;
+  transition: background-color 0.2s ease, color 0.2s ease, padding 0.2s ease;
+}
+
+.hubItem:last-child .hubRow {
+  border-bottom: 2px solid currentColor;
+}
+
+.hubLink {
+  display: block;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 0.85rem;
+}
+
+.hubBlurb {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 34rem;
+  margin: 0;
+}
+
+.light .hubBlurb {
+  color: #666;
+}
+
+.dark .hubBlurb {
+  color: #999;
+}
+
+.hubArrow {
+  flex-shrink: 0;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.75rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.light .hubRow:hover {
+  background-color: #1a202c;
+  color: #fff;
+  padding-left: 1.5rem;
+}
+
+.dark .hubRow:hover {
+  background-color: #fff;
+  color: #1a202c;
+  padding-left: 1.5rem;
+}
+
+.hubRow:hover .hubBlurb {
+  color: inherit;
+  opacity: 0.75;
+}
+
+.hubRow:hover .hubArrow {
+  transform: translateX(8px);
+}
+
+/* ---------- price block ---------- */
+
+.priceBlock {
+  margin: 2.5rem 0 0;
+  padding: 2.5rem 2rem;
+  border: 2px solid currentColor;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.priceLabel {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  opacity: 0.6;
+}
+
+.price {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.priceNote {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 32rem;
+}
+
+.light .priceNote {
+  color: #555;
+}
+
+.dark .priceNote {
+  color: #aaa;
+}
+
+.note {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 40rem;
+  margin-top: 1rem;
+}
+
+.light .note {
+  color: #666;
+}
+
+.dark .note {
+  color: #aaa;
+}
+
+/* ---------- closing cta band ---------- */
+
+.ctaBand {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 2px solid currentColor;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: end;
+}
+
+.ctaBandTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  max-width: 20ch;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.ctaBand .ctaRow {
+  margin-top: 0;
+}
+
+.inlineLink {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 3px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .numGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .priceBlock {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .ctaBand {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .hubRow {
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 100px 36px 60px;
+  }
+
+  .numItem {
+    padding: 2rem 1.5rem 2.25rem;
+  }
+
+  .priceBlock {
+    padding: 2rem 1.5rem;
+  }
+}

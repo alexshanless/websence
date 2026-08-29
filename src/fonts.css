@@ -1,0 +1,33 @@
+/* Self-hosted latin subsets, generated once from Google Fonts.
+   Served from this origin, so there is no third-party connection on the
+   render path, the paths are stable enough to preload, and nothing breaks
+   when Google bumps a version.
+
+   Roboto ships as a variable font: Google returns the same file for 400,
+   500, 600 and 700, so one file with a weight range replaces four identical
+   downloads (168KB -> 42KB).
+
+   font-display: swap paints text immediately in the fallback face rather
+   than holding it invisible while the file loads. */
+
+@font-face {
+  font-family: 'Archivo Black';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/archivo-black-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/roboto-variable.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

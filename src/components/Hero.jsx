@@ -1,4 +1,4 @@
-import React from 'react';
+import { site } from '../config/site';
 import styles from './Hero.module.css';
 
 function Hero({ isSticky }) {
@@ -6,15 +6,17 @@ function Hero({ isSticky }) {
     ${styles.heroContainer}
     ${isSticky ? styles.heroSticky : styles.heroNotSticky}
   `;
+
   return (
-    <section id='hero' className={containerClasses}>
+    <section id="hero" className={containerClasses} aria-label={site.name}>
       <div className={styles.contentWrapper}>
         <span className={`${styles.annotation} ${styles.annotationAbove}`}>
-          we are
+          this is
         </span>
-        <h1 className={styles.mainHeadline}>WEBSENCE.</h1>
+        <p className={styles.mainHeadline}>{site.name}.</p>
         <span className={`${styles.annotation} ${styles.annotationBelow}`}>
-          a web <br></br> design agency
+          a web <br />
+          design studio
         </span>
       </div>
     </section>

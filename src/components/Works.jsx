@@ -1,10 +1,6 @@
-// src/components/Works.jsx - Phase 1: Basic Background Slider
-import React, { useState, useEffect } from 'react';
-
-// Import Swiper React components
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
@@ -19,29 +15,8 @@ import {
 } from 'swiper/modules';
 
 import styles from './Works.module.css';
-
-const projects = [
-  {
-    id: 1,
-    title: 'JNA',
-    bgImage: '/assets/screenshots/JNA-slide.jpg',
-  },
-  {
-    id: 2,
-    title: 'EMBR',
-    bgImage: '/assets/screenshots/embr-slider.jpg',
-  },
-  {
-    id: 3,
-    title: 'TXP',
-    bgImage: '/assets/screenshots/txp-slide.jpg',
-  },
-  {
-    id: 4,
-    title: 'CS MEDIA',
-    bgImage: '/assets/screenshots/c.smedia-slide.jpg',
-  },
-];
+import { featuredProjects, getProjectMedia } from '../data/projects';
+import { webpSrcSet } from '../lib/responsiveImage';
 
 function numberWithZero(num) {
   return num < 10 ? '0' + num : num.toString();
@@ -59,7 +34,6 @@ function Works() {
       thumbsSwiper &&
       !textSwiper.controller.control
     ) {
-      console.log('Connecting text -> thumbs');
       textSwiper.controller.control = thumbsSwiper;
     }
     if (
@@ -67,51 +41,75 @@ function Works() {
       textSwiper &&
       !thumbsSwiper.controller.control
     ) {
-      console.log('Connecting thumbs -> text');
       thumbsSwiper.controller.control = textSwiper;
     }
-    // Cleanup refs on component unmount maybe? Optional advanced.
   }, [textSwiper, thumbsSwiper]);
+
+  useEffect(() => {
+    if (!textSwiper) {
+      return undefined;
+    }
+
+    const recenter = () => {
+      textSwiper.update();
+      textSwiper.slideTo(textSwiper.activeIndex, 0);
+    };
+
+    recenter();
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(recenter);
+    }
+
+    window.addEventListener('resize', recenter);
+    return () => window.removeEventListener('resize', recenter);
+  }, [textSwiper]);
+
   return (
-    <section id='works' className={styles.worksContainer}>
-      {/* --- Background Slider --- */}
+    <section id="works" className={styles.worksContainer}>
       <Swiper
         modules={[EffectFade]}
         onSwiper={setBgSwiper}
         slidesPerView={1}
-        effect='fade'
+        effect="fade"
         allowTouchMove={false}
         className={styles.bgSwiper}
       >
-        {projects.map(project => (
+        {featuredProjects.map((project, index) => (
           <SwiperSlide key={`bg-${project.id}`} className={styles.bgSlide}>
             <img
-              src={project.bgImage}
-              alt={`${project.title} Background`}
+              src={getProjectMedia(project)}
+              srcSet={webpSrcSet(getProjectMedia(project)) || undefined}
+              sizes="100vw"
+              alt={`${project.name} website shown on a laptop`}
               className={styles.bgImage}
+              width={2000}
+              height={1333}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              decoding="async"
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* --- Titles Slider --- */}
       <Swiper
         modules={[Controller, Mousewheel, Keyboard, Thumbs, Navigation]}
         onSwiper={setTextSwiper}
         thumbs={{ swiper: bgSwiper && !bgSwiper.destroyed ? bgSwiper : null }}
-        slidesPerView='auto'
+        slidesPerView="auto"
         speed={600}
         slideToClickedSlide={true}
         centeredSlides={true}
+        observer={true}
+        observeParents={true}
         mousewheel={true}
         keyboard={true}
         className={styles.textSwiper}
-        slideActiveClass={styles.isActive}
-        onTransitionEnd={swiper => {
-          console.log('Transition Ended. Forcing update.');
+        onTransitionEnd={(swiper) => {
           swiper.update();
         }}
-        onSlideChange={swiper => {
+        onSlideChange={(swiper) => {
           setCurrentIndex(swiper.activeIndex);
         }}
         navigation={{
@@ -119,9 +117,9 @@ function Works() {
           prevEl: `.${styles.swiperPrev}`,
         }}
       >
-        {projects.map(project => (
+        {featuredProjects.map((project) => (
           <SwiperSlide key={`text-${project.id}`} className={styles.textSlide}>
-            <h2 className={styles.slideTitleHeading}>{project.title}</h2>
+            <h2 className={styles.slideTitleHeading}>{project.featuredTitle}</h2>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -129,7 +127,6 @@ function Works() {
       <Swiper
         modules={[Controller, Thumbs]}
         onSwiper={setThumbsSwiper}
-        // controller={textSwiper ? { control: textSwiper } : undefined} // Comment out if causing issues, rely on useEffect
         watchSlidesProgress={true}
         slidesPerView={3}
         spaceBetween={10}
@@ -138,21 +135,24 @@ function Works() {
         className={styles.thumbsSwiper}
         slideActiveClass={styles.isActive}
       >
-        {projects.map(project => (
-          <SwiperSlide
-            key={`thumb-${project.id}`}
-            className={styles.thumbSlide}
-          >
+        {featuredProjects.map((project) => (
+          <SwiperSlide key={`thumb-${project.id}`} className={styles.thumbSlide}>
             <img
-              src={project.bgImage}
-              alt={`${project.title} Thumbnail`}
+              src={getProjectMedia(project)}
+              srcSet={webpSrcSet(getProjectMedia(project)) || undefined}
+              sizes="200px"
+              alt=""
+              aria-hidden="true"
               className={styles.thumbImage}
+              width={2000}
+              height={1333}
+              loading="lazy"
+              decoding="async"
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* --- Controls / Slide Numbers --- */}
       <div className={styles.swiperControls}>
         <div className={styles.slideNumber}>
           <span className={styles.swiperNumberCurrent}>
@@ -160,11 +160,10 @@ function Works() {
           </span>
           /
           <span className={styles.swiperNumberTotal}>
-            {numberWithZero(projects.length)}
+            {numberWithZero(featuredProjects.length)}
           </span>
         </div>
         <div className={styles.navButtonsContainer}>
-          {/* Add the specific classes for Swiper to find */}
           <button className={`${styles.swiperPrev} ${styles.navButton}`}>
             Prev
           </button>

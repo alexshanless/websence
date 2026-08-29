@@ -1,0 +1,36 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  padding: 1rem 2.25rem;
+  border: 2px solid currentColor;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark {
+  background-color: #1a202c;
+  color: #fff;
+  border-color: #1a202c;
+}
+
+.dark:hover {
+  background-color: transparent;
+  color: #1a202c;
+}
+
+.light {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.light:hover {
+  background-color: transparent;
+  color: #fff;
+}

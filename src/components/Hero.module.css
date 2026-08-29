@@ -4,73 +4,94 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    min-height: 100vh; 
-    display: flex; 
-    width: 100vw;
-    align-items: center; 
-    justify-content: center; 
-    padding: 20px; 
-    background-color: #ffffff; 
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
     overflow: hidden;
     background-image: url('https://cdn.prod.website-files.com/65386cac3f64810eb31ba215/65545832d5790dae98f8bf0a_Ellipse%206.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
   }
-  
+
   .contentWrapper {
-    position: relative; 
-    text-align: center; 
+    position: relative;
+    text-align: center;
   }
-  
+
   .mainHeadline {
     font-family: 'Archivo Black', sans-serif;
-   
-    font-size: clamp(4rem, 18vw, 11rem);
+    /* The word cannot break, so its size is bounded by the viewport. It
+       renders 6.61x its font-size wide, and the frame plus padding costs
+       ~90px, giving (100vw - 90px) / 6.61 ≈ 15vw - 14px as the largest size
+       that fits. The old 18vw was clipped by overflow:hidden between about
+       600px and 950px wide. */
+    font-size: min(calc(15vw - 14px), 11rem);
     text-transform: uppercase;
-    color: #1a202c; 
-    margin: 0; 
-    padding: 0; 
+    color: #1a202c;
+    margin: 0;
+    padding: 0;
     line-height: 1;
-    user-select: none; 
+    user-select: none;
   }
-  
+
   .annotation {
-    position: absolute; 
+    position: absolute;
     font-family: 'Roboto', sans-serif;
-    font-size: clamp(0.7rem, 1.5vw, 0.8
-    rem); 
-    color: #000000; 
-    white-space: nowrap; 
+    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    color: #000000;
+    white-space: nowrap;
     user-select: none;
     text-transform: uppercase;
-
   }
-  
+
   .annotationAbove {
-    top: 0; 
-    left: 0; 
+    top: 0;
+    left: 0;
     transform: translate(-5%, -60%);
   }
-  
+
+  /* Both lines align on their right edge, under the full stop.
+     `align-items: right` / `justify-content: right` were not valid values, so
+     the block fell back to the wrapper's centred text. */
   .annotationBelow {
-    display:flex;
-    align-items: right;
-    justify-content: right;
     bottom: 0;
-    right: 0; 
+    right: 0;
+    text-align: right;
+    line-height: 1.5;
     transform: translate(5%, 60%);
   }
-  
 
+  /* "WEBSENCE." is one unbreakable word, so its size is capped by the
+     viewport, not chosen freely. Measured: the word renders 6.61x its
+     font-size wide. With 12px padding inside the 25px frame that leaves
+     roughly 11vw as the largest size that still fits at 320px. The old rule
+     asked for 20vw with a 3rem floor and overflowed the screen. */
   @media (max-width: 600px) {
+    .heroContainer {
+      padding: 12px;
+      /* Small viewport height, so mobile browser chrome cannot clip it. */
+      min-height: 100svh;
+    }
+
     .mainHeadline {
-      font-size: clamp(3rem, 20vw, 10rem); 
+      font-size: 11vw;
     }
+
+    .annotation {
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+    }
+
     .annotationAbove {
-       transform: translate(-5%, -80%); 
+      transform: translate(0, -70%);
     }
-     .annotationBelow {
-       transform: translate(5%, 80%); 
+
+    .annotationBelow {
+      transform: translate(0, 70%);
     }
   }

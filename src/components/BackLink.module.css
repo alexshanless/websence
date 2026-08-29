@@ -1,0 +1,65 @@
+/* Mirrors the nav pill at the bottom of the screen: same treatment, opposite
+   corner. Fixed rather than inline because pages have different backgrounds
+   (light on /services and /work, black on /contact and /construction) and one
+   floating chip reads correctly on all of them.
+
+   Sits inside the 25px decorative frame, at the same layer as the navbar. */
+.wrap {
+  position: fixed;
+  top: 41px;
+  left: 41px;
+  z-index: 999;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.74);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  min-height: 44px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.back:hover {
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.back:active {
+  transform: scale(0.96);
+}
+
+.back:focus-visible {
+  outline: 2px solid skyblue;
+  outline-offset: 2px;
+}
+
+.arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .wrap {
+    top: 33px;
+    left: 33px;
+  }
+
+  .back {
+    font-size: 0.72rem;
+    padding: 10px 16px;
+    min-height: 44px;
+  }
+}

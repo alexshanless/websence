@@ -20,26 +20,28 @@
     transform: translateX(-50%) translateY(20px);
   }
   
+  /* One pill only. The background lives here; .navMenu stays transparent so
+     the bar does not render as a dark capsule inside a light one. */
   .navContent {
     display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.65); 
-    padding: 10px 30px; 
-    border-radius: 30px; 
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); 
+    background-color: rgba(0, 0, 0, 0.74);
+    padding: 10px 20px;
+    border-radius: 999px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  
+
   .navMenu {
-    list-style: none; 
-    display: flex; 
-    align-items: center; 
+    list-style: none;
+    display: flex;
+    align-items: center;
     margin: 0;
-    padding: 10px;
-    gap: 10px; 
-    background-color: #00000068;
-    border-radius: 16px;
+    padding: 0;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .navLink {
@@ -63,8 +65,12 @@
   }
   
   .navLink:hover {
-    color: #eee; /* Slightly dimmed white on hover? */
-    background-color: rgba(255, 255, 255, 0.08); /* Even more subtle background on hover */
+    color: #eee;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .navLink.active {
+    background-color: rgba(255, 255, 255, 0.16);
   }
   
   .navLink:focus-visible {
@@ -86,3 +92,50 @@
         transform: scale(0.96);
         background-color: rgba(255, 255, 255, 0.1);
     }
+  /* The four items wrapped into a vertical stack on small screens, which
+     turned the pill into a blob. Keep them on one row and shrink instead. */
+  @media (max-width: 600px) {
+    .navbar {
+      /* Clear of the very bottom edge, and inside the 25px frame. */
+      bottom: 16px;
+      left: 12px;
+      right: 12px;
+      transform: none;
+      width: auto;
+    }
+
+    .navbar.hidden {
+      transform: translateY(20px);
+    }
+
+    .navContent {
+      max-width: 100%;
+      width: 100%;
+      padding: 6px 8px;
+      justify-content: center;
+    }
+
+    .navMenu {
+      flex-wrap: nowrap;
+      gap: 0;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .navItem {
+      flex: 1 1 0;
+      display: flex;
+    }
+
+    .navLink {
+      /* 44px minimum tap target. Measured 31px before. */
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 0.84rem;
+      padding: 8px 4px;
+      white-space: nowrap;
+    }
+  }

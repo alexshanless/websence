@@ -1,0 +1,135 @@
+.marquee {
+  position: relative;
+  overflow: hidden;
+  /* Fades the marks into the page at both ends instead of cutting them dead. */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6rem,
+    #000 calc(100% - 6rem),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 6rem,
+    #000 calc(100% - 6rem),
+    transparent 100%
+  );
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 42s linear infinite;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+/* Two identical copies, so -50% returns the track to its starting position. */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.75rem;
+  height: 78px;
+  flex-shrink: 0;
+}
+
+/* Every mark is capped to the same box, so wildly different source sizes read
+   as one row rather than a jumble. */
+.logo {
+  max-height: 42px;
+  max-width: 170px;
+  width: auto;
+  object-fit: contain;
+  /* Grayscale pulls unrelated brand palettes into one band. multiply drops
+     the white and cream backgrounds that travel with a scraped logo, so the
+     marks sit on the band rather than in visible boxes. */
+  filter: grayscale(100%);
+  mix-blend-mode: multiply;
+  opacity: 0.72;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.item:hover .logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.wordmark {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #1a202c;
+  /* 0.55 blended to 3.75:1 on white, below AA. 0.7 is 6.03:1. */
+  opacity: 0.7;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.item:hover .wordmark {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    /* Without motion the row must not sit half-scrolled off-screen. */
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .track > *:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .item {
+    padding: 0 1.5rem;
+    height: 64px;
+  }
+
+  .logo {
+    max-height: 32px;
+    max-width: 130px;
+  }
+
+  .marquee {
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 2rem,
+      #000 calc(100% - 2rem),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 2rem,
+      #000 calc(100% - 2rem),
+      transparent 100%
+    );
+  }
+}
