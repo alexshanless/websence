@@ -91,9 +91,13 @@
 
 /* ---------- proof band ---------- */
 
+/* Sits between the intro and the slider now, which puts it inside the sticky
+   hero's range, so it has to stack above it the way the intro does. */
 .proof {
+  position: relative;
+  z-index: 2;
   background-color: #fff;
-  padding: 0 36px;
+  padding: 0 36px 24px;
 }
 
 .proofInner {

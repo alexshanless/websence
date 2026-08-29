@@ -109,26 +109,26 @@ function HomePage() {
             </dl>
           </div>
         </section>
+        <section className={styles.proof} aria-label="Recent clients">
+          <div className={styles.proofInner}>
+            <div className={styles.proofHead}>
+              <p className={styles.proofLabel}>Recent work for</p>
+              <Link to="/work" className={styles.proofLink}>
+                See the work
+              </Link>
+            </div>
+            <ClientMarquee />
+            {/* The marquee is decorative, so the names still exist as text. */}
+            <p className={styles.visuallyHidden}>{proofNames.join(', ')}</p>
+          </div>
+        </section>
+
         <Works />
         <div
           ref={worksEndRef}
           style={{ height: '1px', pointerEvents: 'none' }}
         ></div>
       </main>
-
-      <section className={styles.proof} aria-label="Recent clients">
-        <div className={styles.proofInner}>
-          <div className={styles.proofHead}>
-            <p className={styles.proofLabel}>Recent work for</p>
-            <Link to="/work" className={styles.proofLink}>
-              See the work
-            </Link>
-          </div>
-          <ClientMarquee />
-          {/* The marquee is decorative, so the names still exist as text. */}
-          <p className={styles.visuallyHidden}>{proofNames.join(', ')}</p>
-        </div>
-      </section>
 
       <section className={styles.studio} aria-labelledby="studio-heading">
         <div className={styles.studioInner}>
