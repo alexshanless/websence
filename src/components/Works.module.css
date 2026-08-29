@@ -188,3 +188,76 @@
     color: #111;
 }
 
+
+/* ---------- mobile ---------- */
+
+/* The slider had no mobile rules at all. Three problems on a phone:
+   the slide box was a full 100vh portrait, so object-fit: cover cropped a
+   narrow vertical strip out of a 3:2 laptop mockup and the composition was
+   lost; the thumbnails sat four across in ~100px boxes; and the controls
+   were 33px tall. */
+@media (max-width: 700px) {
+  .worksContainer {
+    /* Not full height. The slider is proof, not a landing screen. */
+    min-height: 0;
+    height: auto;
+    padding: 0 0 28px;
+    display: block;
+  }
+
+  .bgSwiper {
+    position: relative !important;
+    /* Close to the 3:2 of the mockups, so the crop is slight. */
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .bgSlide {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .bgImage {
+    height: 100%;
+    object-position: center;
+  }
+
+  /* Hidden on mobile: four ~100px thumbs crowded the controls and duplicated
+     what prev/next already does. */
+  .thumbsSwiper {
+    display: none;
+  }
+
+  .swiperControls {
+    position: static;
+    margin: 18px auto 0;
+    width: max-content;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .navButtonsContainer {
+    gap: 4px;
+  }
+
+  /* 44px tap targets. These were 61x33. */
+  .navButton {
+    min-height: 44px;
+    min-width: 72px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .slideNumber {
+    padding: 0 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}

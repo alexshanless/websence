@@ -137,6 +137,10 @@
 }
 
 .proofLink {
+  /* 24px minimum tap target. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-family: 'Roboto', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
@@ -377,6 +381,10 @@
 }
 
 .secondaryLink {
+  /* 24px minimum tap target. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-family: 'Roboto', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.12em;

@@ -255,3 +255,20 @@
   height: 1px;
   overflow: hidden;
 }
+
+/* Native radios and checkboxes render about 13px, which is a poor tap target
+   on a phone. Scale the control and give the whole label a comfortable
+   height, so the tappable area is the label rather than just the box. */
+.choice input,
+.addOn input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: #1a202c;
+  cursor: pointer;
+}
+
+.choice,
+.addOn {
+  min-height: 44px;
+}

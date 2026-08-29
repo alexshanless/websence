@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -65,8 +65,40 @@ function Works() {
     return () => window.removeEventListener('resize', recenter);
   }, [textSwiper]);
 
+  const touchStart = useRef(null);
+
+  const onTouchStart = (event) => {
+    const t = event.changedTouches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  };
+
+  const onTouchEnd = (event) => {
+    if (!touchStart.current || !textSwiper) {
+      return;
+    }
+    const t = event.changedTouches[0];
+    const dx = t.clientX - touchStart.current.x;
+    const dy = t.clientY - touchStart.current.y;
+    touchStart.current = null;
+    // Only act on a clearly horizontal drag, so a vertical scroll that wanders
+    // sideways does not change slide.
+    if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.5) {
+      return;
+    }
+    if (dx < 0) {
+      textSwiper.slideNext();
+    } else {
+      textSwiper.slidePrev();
+    }
+  };
+
   return (
-    <section id="works" className={styles.worksContainer}>
+    <section
+      id="works"
+      className={styles.worksContainer}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <Swiper
         modules={[EffectFade]}
         onSwiper={setBgSwiper}
