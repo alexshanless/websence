@@ -1,114 +1,118 @@
-.contact {
-  min-height: 100vh;
+/* The page was a full 1000px black band with a large empty area under the
+   contact details, centre aligned while every other page is left aligned
+   editorial. It is light throughout now and sized to its content. */
+
+.contactPage {
+  background-color: #fff;
+}
+
+.contactPage .intro {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+/* Same asymmetric split as the home page intro. */
+.introGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem 4.5rem;
+  align-items: start;
+}
+
+.introSide {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 36px 160px;
-  background-color: #000;
-  border-top: 1px solid #222;
-  position: relative;
-  /* The watermark behind this section is intentionally wider than the
-     viewport; clip it rather than letting it scroll the page. */
-  overflow: hidden;
+  flex-direction: column;
+  gap: 2.25rem;
+  min-width: 0;
+  padding-top: 0.5rem;
 }
 
-.backgroundText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(4rem, 15vw, 12rem);
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.03);
-  white-space: nowrap;
-  user-select: none;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.container {
-  max-width: 700px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.ctaSection {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.headline {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  text-transform: uppercase;
-  color: #fff;
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
-  user-select: none;
-}
-
-.subheadline {
+.lede {
   font-family: 'Roboto', sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  color: #999;
-  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin: 0;
 }
 
-.emailLink {
-  /* 24px minimum tap target. */
+/* Call and email as stated facts, the same treatment as the price and
+   timeline anchor on the home page. */
+.direct {
+  margin: 3.5rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-top: 2px solid #1a202c;
+}
+
+.directCell {
+  padding: 1.5rem 0 0;
+  min-width: 0;
+}
+
+.directCell + .directCell {
+  padding-left: 2.5rem;
+  margin-left: 2.5rem;
+  border-left: 1px solid #ddd;
+}
+
+.directLabel {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  margin: 0 0 0.6rem;
+}
+
+.directValue {
+  margin: 0;
+}
+
+.directLink {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  line-height: 1.3;
+  color: #1a202c;
+  text-decoration: none;
+  border-bottom: 2px solid #1a202c;
+  padding-bottom: 2px;
   display: inline-flex;
   align-items: center;
   min-height: 24px;
-  display: block;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.95rem;
-  color: #fff;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  margin-top: 0.5rem;
 }
 
-.emailLink:hover {
-  color: #ccc;
+.directLink:hover {
+  color: #555;
+  border-bottom-color: #555;
 }
 
-@media (max-width: 768px) {
-  .contact {
-    padding: 60px 36px;
-  }
-
-  .ctaSection {
-    margin-bottom: 3rem;
-  }
-
+.stepsSection {
+  margin-top: 4rem;
 }
 
-.contactMeta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem 2.5rem;
-  margin-top: 2rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid #333;
+.stepsTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #1a202c;
+  margin: 0 0 1.75rem;
 }
 
+/* Hairline cell matrix, the same device as the home page outcome grid. */
 .nextSteps {
   list-style: none;
-  margin: 3.5rem 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background-color: #333;
-  border: 1px solid #333;
-  text-align: left;
+  background-color: #ddd;
+  border: 1px solid #ddd;
 }
 
 .step {
-  background-color: #000;
+  background-color: #fff;
   padding: 1.75rem 1.5rem 2rem;
 }
 
@@ -117,25 +121,19 @@
   font-family: 'Archivo Black', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
-  color: #949494;
+  color: #6b6b6b;
   margin-bottom: 1rem;
 }
 
 .stepBody {
   font-family: 'Roboto', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #aaa;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #444;
   margin: 0;
 }
 
-@media (max-width: 700px) {
-  .nextSteps {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- quote form (light) ---------- */
+/* ---------- quote form ---------- */
 
 .quoteSection {
   background-color: #fff;
@@ -145,6 +143,8 @@
 .quoteInner {
   max-width: 1100px;
   margin: 0 auto;
+  padding-top: 3.5rem;
+  border-top: 2px solid #1a202c;
 }
 
 .quoteHeading {
@@ -154,6 +154,7 @@
   line-height: 1.05;
   color: #1a202c;
   margin: 0 0 1rem;
+  overflow-wrap: break-word;
 }
 
 .quoteLede {
@@ -163,12 +164,44 @@
   color: #444;
   margin: 0 0 3rem;
   max-width: 44rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 900px) {
+  .introGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .introSide {
+    padding-top: 0;
+  }
+
+  .nextSteps {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
   .quoteSection {
     padding: 64px 20px 56px;
+  }
+
+  .quoteInner {
+    padding-top: 2.5rem;
+  }
+
+  .stepsSection {
+    margin-top: 3.5rem;
+  }
+
+  .direct {
+    grid-template-columns: 1fr;
+  }
+
+  .directCell + .directCell {
+    padding-left: 0;
+    margin-left: 0;
+    border-left: none;
+    margin-top: 1.5rem;
   }
 }
