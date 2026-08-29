@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Analytics from './Analytics';
-import BackLink from './BackLink';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -33,7 +32,6 @@ function Layout() {
       <Analytics />
       <SiteFrame />
       <Navbar />
-      <BackLink />
       <Outlet />
       <Footer />
     </>
