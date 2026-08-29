@@ -1,5 +1,0 @@
-# SPA fallback. Without this every URL except / returns 404 in production,
-# including every URL in sitemap.xml, because only index.html exists on disk.
-# The 200 keeps the original URL in the address bar rather than redirecting.
-# Used by Netlify and Cloudflare Pages.
-/*  /index.html  200

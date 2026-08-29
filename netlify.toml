@@ -1,0 +1,55 @@
+# Build and routing config lives here rather than in the Netlify UI, so a
+# rebuild from a clean checkout produces the same site.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Pin the major version so a Netlify default bump cannot change the build.
+  NODE_VERSION = "20"
+
+# Specific rules first: Netlify applies redirects in order, so anything below
+# the catch-all would never be reached.
+
+# Real 301 rather than the client side redirect in App.jsx, so the redirect
+# happens before any JavaScript runs and search engines see the status code.
+[[redirects]]
+  from = "/portfolio"
+  to = "/work"
+  status = 301
+  force = true
+
+# SPA fallback. Without this every URL except / returns 404, including every
+# URL in sitemap.xml, because only index.html exists on disk. Status 200 keeps
+# the requested URL in the address bar instead of redirecting to /.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Vite fingerprints these filenames, so they can be cached indefinitely.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# index.html is deliberately not cached long: it carries the hashed asset
+# names, so a stale copy would keep serving an old build.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
