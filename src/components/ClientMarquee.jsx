@@ -19,7 +19,10 @@ function Mark({ client }) {
       className={styles.logo}
       width={client.logoWidth || 300}
       height={client.logoHeight || 100}
-      loading="lazy"
+      // Not lazy. The track is wider than the viewport, so marks near the end
+      // of the row sit permanently off-screen to the right, and a viewport
+      // based lazy load never fires for them. The whole set is about 100KB.
+      loading="eager"
       decoding="async"
     />
   );
