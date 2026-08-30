@@ -474,3 +474,10 @@
   color: #949494;
   margin: -1.25rem 0 2rem;
 }
+
+/* Bounds the sticky hero. Without it the hero is constrained only by <main>,
+   which wraps the whole page, so it stays pinned past every section instead
+   of releasing after the work slider. */
+.stickyRegion {
+  position: relative;
+}

@@ -74,60 +74,65 @@ function HomePage() {
         schema={localBusinessSchema()}
       />
       <main>
-        <Hero isSticky={isHeroSticky} />
-        <section className={styles.intro} aria-labelledby="home-heading">
-          <div className={styles.introInner}>
-            <div className={styles.introGrid}>
-              <h1 id="home-heading" className={styles.introHeadline}>
-                Website design for Tacoma businesses
-              </h1>
-              <div className={styles.introSide}>
-                <p className={styles.introBody}>
-                  Custom sites that bring in calls, quote requests, and booked
-                  jobs. Built in Tacoma by someone who answers the phone.
-                </p>
-                <div className={styles.introCta}>
-                  <CtaButton to="/contact" variant="dark">
-                    {site.ctaLabel}
-                  </CtaButton>
+        {/* Bounds the sticky hero: it releases at the end of this block,
+            not at the end of the page. */}
+        <div className={styles.stickyRegion}>
+          <Hero isSticky={isHeroSticky} />
+          <section className={styles.intro} aria-labelledby="home-heading">
+            <div className={styles.introInner}>
+              <div className={styles.introGrid}>
+                <h1 id="home-heading" className={styles.introHeadline}>
+                  Website design for Tacoma businesses
+                </h1>
+                <div className={styles.introSide}>
+                  <p className={styles.introBody}>
+                    Custom sites that bring in calls, quote requests, and booked
+                    jobs. Built in Tacoma by someone who answers the phone.
+                  </p>
+                  <div className={styles.introCta}>
+                    <CtaButton to="/contact" variant="dark">
+                      {site.ctaLabel}
+                    </CtaButton>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* The price anchor. Above the fold, stated as a fact. */}
-            <dl className={styles.anchor}>
-              <div className={styles.anchorCell}>
-                <dt className={styles.anchorLabel}>Price</dt>
-                <dd className={styles.anchorValue}>
-                  From {formatPrice(startingPrice)}
-                </dd>
-              </div>
-              <div className={styles.anchorCell}>
-                <dt className={styles.anchorLabel}>Timeline</dt>
-                <dd className={styles.anchorValue}>{site.pricing.timeline}</dd>
-              </div>
-            </dl>
-          </div>
-        </section>
-        <section className={styles.proof} aria-label="Recent clients">
-          <div className={styles.proofInner}>
-            <div className={styles.proofHead}>
-              <p className={styles.proofLabel}>Recent work</p>
-              <Link to="/work" className={styles.proofLink}>
-                See the work
-              </Link>
+              {/* The price anchor. Above the fold, stated as a fact. */}
+              <dl className={styles.anchor}>
+                <div className={styles.anchorCell}>
+                  <dt className={styles.anchorLabel}>Price</dt>
+                  <dd className={styles.anchorValue}>
+                    From {formatPrice(startingPrice)}
+                  </dd>
+                </div>
+                <div className={styles.anchorCell}>
+                  <dt className={styles.anchorLabel}>Timeline</dt>
+                  <dd className={styles.anchorValue}>{site.pricing.timeline}</dd>
+                </div>
+              </dl>
             </div>
-            <ClientMarquee />
-            {/* The marquee is decorative, so the names still exist as text. */}
-            <p className={styles.visuallyHidden}>{proofNames.join(', ')}</p>
-          </div>
-        </section>
+          </section>
+          <section className={styles.proof} aria-label="Recent clients">
+            <div className={styles.proofInner}>
+              <div className={styles.proofHead}>
+                <p className={styles.proofLabel}>Recent work</p>
+                <Link to="/work" className={styles.proofLink}>
+                  See the work
+                </Link>
+              </div>
+              <ClientMarquee />
+              {/* The marquee is decorative, so the names still exist as text. */}
+              <p className={styles.visuallyHidden}>{proofNames.join(', ')}</p>
+            </div>
+          </section>
 
-        <Works />
-        <div
-          ref={worksEndRef}
-          style={{ height: '1px', pointerEvents: 'none' }}
-        ></div>
+          <Works />
+          <div
+            ref={worksEndRef}
+            style={{ height: '1px', pointerEvents: 'none' }}
+          ></div>
+
+        </div>
 
       <section className={styles.studio} aria-labelledby="studio-heading">
         <div className={styles.studioInner}>
