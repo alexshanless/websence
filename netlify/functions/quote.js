@@ -88,6 +88,7 @@ export default async (req) => {
   const to = process.env.QUOTE_TO_EMAIL;
   const from = process.env.QUOTE_FROM_EMAIL;
 
+  let emailed = false;
   if (apiKey && to && from) {
     const lines = Object.entries(record)
       .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
@@ -108,7 +109,9 @@ export default async (req) => {
           text: lines,
         }),
       });
-      if (!res.ok) {
+      if (res.ok) {
+        emailed = true;
+      } else {
         console.error('quote: resend rejected', res.status, await res.text());
       }
     } catch (error) {
@@ -123,5 +126,5 @@ export default async (req) => {
     return bad('Unable to send your request right now.', 500);
   }
 
-  return ok({ received: true });
+  return ok({ received: true, stored, emailed });
 };
