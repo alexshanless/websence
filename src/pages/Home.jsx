@@ -112,7 +112,7 @@ function HomePage() {
         <section className={styles.proof} aria-label="Recent clients">
           <div className={styles.proofInner}>
             <div className={styles.proofHead}>
-              <p className={styles.proofLabel}>Recent work for</p>
+              <p className={styles.proofLabel}>Recent work</p>
               <Link to="/work" className={styles.proofLink}>
                 See the work
               </Link>
