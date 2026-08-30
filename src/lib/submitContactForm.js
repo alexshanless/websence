@@ -25,7 +25,7 @@ function buildPayload(formData, estimate) {
 export async function submitQuoteRequest(formData, estimate) {
   const payload = buildPayload(formData, estimate);
 
-  if (site.contactFormEndpoint) {
+  try {
     const response = await fetch(site.contactFormEndpoint, {
       method: 'POST',
       headers: {
@@ -36,33 +36,16 @@ export async function submitQuoteRequest(formData, estimate) {
     });
 
     if (!response.ok) {
-      throw new Error('Unable to send your request right now.');
+      // The function replies with a readable message; fall back if it did not.
+      const detail = await response.json().catch(() => null);
+      throw new Error(detail?.error || 'Unable to send your request right now.');
     }
 
     trackQuoteRequest(payload);
-    return;
+  } catch (error) {
+    // Surface the real reason rather than silently doing something else.
+    throw error instanceof Error
+      ? error
+      : new Error('Unable to send your request right now.');
   }
-
-  if (!site.email) {
-    throw new Error('Contact is not configured yet.');
-  }
-
-  // Fallback only. This hands the request to the visitor's mail client, so
-  // nothing is stored on our side — the endpoint above is the real path.
-  const subject = encodeURIComponent(payload._subject);
-  const body = encodeURIComponent(
-    [
-      payload.businessDescription,
-      '',
-      `Name: ${payload.name}`,
-      `Business: ${payload.businessName}`,
-      `Email: ${payload.email}`,
-      `Phone: ${payload.phone}`,
-      `Package: ${payload.package}`,
-      `Add-ons: ${payload.addOns}`,
-      `Live by: ${payload.liveBy}`,
-    ].join('\n')
-  );
-  window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-  trackQuoteRequest(payload);
 }

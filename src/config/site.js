@@ -1,4 +1,7 @@
-const contactFormEndpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT ?? '';
+// Defaults to the Netlify function in this repo. Set
+// VITE_CONTACT_FORM_ENDPOINT only to point somewhere else.
+const contactFormEndpoint =
+  import.meta.env.VITE_CONTACT_FORM_ENDPOINT || '/.netlify/functions/quote';
 const gaMeasurementId = import.meta.env.VITE_GA4_MEASUREMENT_ID ?? '';
 
 export const site = {
