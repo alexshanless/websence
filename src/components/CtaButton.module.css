@@ -34,3 +34,10 @@
   background-color: transparent;
   color: #fff;
 }
+
+/* The button relied on the browser default, which the dark and light variants
+   both wash out. An explicit ring keeps it visible on either ground. */
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

@@ -5,7 +5,7 @@ import styles from './LegalPage.module.css';
 
 const PrivacyPolicy = () => {
   return (
-    <div className={styles.legalPage}>
+    <main className={styles.legalPage}>
       <Seo
         title="Privacy Policy | Websence"
         description="How Websence collects, uses, and stores the information you send through the contact and quote forms on this Tacoma website design studio site."
@@ -29,12 +29,19 @@ const PrivacyPolicy = () => {
 
         <section className={styles.section}>
           <h2>2. Information I collect</h2>
-          <p>If you use the contact form, I collect:</p>
+          <p>If you use the quote form, I collect:</p>
           <ul>
             <li>Name</li>
+            <li>Business name</li>
             <li>Email</li>
             <li>Phone, if you include it</li>
-            <li>The message you write</li>
+            <li>The package you select, and any add-ons you tick</li>
+            <li>What you write about the business</li>
+            <li>When you want to be live</li>
+            <li>
+              The estimate shown at the time you sent it, so the request can be
+              read back against what you saw
+            </li>
           </ul>
           <p>
             The site may also collect basic technical data such as browser type
@@ -62,7 +69,7 @@ const PrivacyPolicy = () => {
           </p>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

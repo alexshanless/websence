@@ -104,6 +104,14 @@ function QuoteForm() {
       return;
     }
 
+    // A <form> would have done this with type="email". Deliberately loose:
+    // enough to catch a typo, not so strict it rejects a valid address.
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim())) {
+      setStatus('error');
+      setErrorMessage('That email does not look right. Check it and try again.');
+      return;
+    }
+
     setStatus('submitting');
     setErrorMessage('');
 
@@ -121,9 +129,19 @@ function QuoteForm() {
     }
   };
 
+  // Enter submits from any single line field, which a <form> would have done
+  // natively. Textareas keep Enter for line breaks.
+  const handleKeyDown = (event) => {
+    if (event.key !== 'Enter' || event.target.tagName === 'TEXTAREA') {
+      return;
+    }
+    event.preventDefault();
+    handleSubmit();
+  };
+
   return (
     <div className={styles.quote}>
-      <div className={styles.fields}>
+      <div className={styles.fields} onKeyDown={handleKeyDown}>
         <div className={styles.row}>
           <label className={styles.field}>
             <span className={styles.label}>Name</span>

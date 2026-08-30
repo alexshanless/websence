@@ -37,18 +37,6 @@ export const projects = [
     marquee: true,
   },
   {
-    id: 'txp',
-    name: 'TXP',
-    featuredTitle: 'TXP',
-    industry: '',
-    outcome: '',
-    image: '/assets/projects/txp.jpg',
-    slideImage: '/assets/screenshots/txp-slide.jpg',
-    link: '',
-    featured: true,
-    featuredOrder: 3,
-  },
-  {
     id: 'cs-media',
     logo: '',
     name: 'C.S. Media',

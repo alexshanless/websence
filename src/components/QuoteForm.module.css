@@ -53,6 +53,13 @@
   border-radius: 0;
 }
 
+/* The bottom border alone is not a visible focus indicator for a keyboard
+   user, so the field gets a real ring. */
+.input:focus-visible {
+  outline: 2px solid #1a202c;
+  outline-offset: 2px;
+}
+
 .input:focus {
   border-bottom-color: #1a202c;
 }
@@ -206,6 +213,11 @@
 .submit:hover:not(:disabled) {
   background-color: transparent;
   color: #1a202c;
+}
+
+.submit:focus-visible {
+  outline: 2px solid #1a202c;
+  outline-offset: 3px;
 }
 
 .submit:disabled {

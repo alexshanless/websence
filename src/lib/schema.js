@@ -38,6 +38,9 @@ export function localBusinessSchema() {
   if (site.phone) {
     schema.telephone = site.phone;
   }
+  if (site.googleBusinessProfile) {
+    schema.sameAs = [site.googleBusinessProfile];
+  }
   if (site.address.street) {
     schema.address.streetAddress = site.address.street;
   }

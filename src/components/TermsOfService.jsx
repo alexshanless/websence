@@ -5,7 +5,7 @@ import styles from './LegalPage.module.css';
 
 const TermsOfService = () => {
   return (
-    <div className={styles.legalPage}>
+    <main className={styles.legalPage}>
       <Seo
         title="Terms of Service | Websence"
         description="The terms for using the Websence website and for commissioning custom website design work from this Tacoma studio, including scope and payment."
@@ -59,7 +59,7 @@ const TermsOfService = () => {
           </p>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 

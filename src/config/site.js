@@ -288,7 +288,7 @@ export const site = {
   contactFormEndpoint: contactFormEndpoint.trim(),
   gaMeasurementId: gaMeasurementId.trim(),
   legalUpdated: 'August 25, 2026',
-  // Google Business Profile URL, linked from the footer once supplied.
+  // Google Business Profile URL. Footer link and LocalBusiness sameAs.
   // Google's own share link for the profile. It redirects to a Google search
   // carrying kgmid=/g/11q96w93gg, the stable Knowledge Graph id for the
   // business. If the shortener is ever retired, this is the durable form:

@@ -20,13 +20,45 @@
   status = 301
   force = true
 
-# SPA fallback. Without this every URL except / returns 404, including every
-# URL in sitemap.xml, because only index.html exists on disk. Status 200 keeps
-# the requested URL in the address bar instead of redirecting to /.
+# Known routes serve the app shell with a 200. They are listed one by one so
+# the catch-all below can answer unknown paths with a real 404 status; a
+# blanket /* rule made every wrong URL look like a real page to crawlers.
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/work"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms-of-service"
+  to = "/index.html"
+  status = 200
+
+# Anything else: same shell, so the React 404 page renders, but with a 404
+# status so crawlers are told the truth.
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
+  status = 404
 
 # Vite fingerprints these filenames, so they can be cached indefinitely.
 [[headers]]

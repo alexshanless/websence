@@ -128,7 +128,6 @@ function HomePage() {
           ref={worksEndRef}
           style={{ height: '1px', pointerEvents: 'none' }}
         ></div>
-      </main>
 
       <section className={styles.studio} aria-labelledby="studio-heading">
         <div className={styles.studioInner}>
@@ -215,6 +214,7 @@ function HomePage() {
           </div>
         </div>
       </section>
+      </main>
     </>
   );
 }
