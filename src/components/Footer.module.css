@@ -54,6 +54,10 @@
 }
 
 .gbpLink {
+  /* 24px minimum tap target, matching the other footer links. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-family: 'Roboto', sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.1em;

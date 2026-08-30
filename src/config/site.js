@@ -289,7 +289,11 @@ export const site = {
   gaMeasurementId: gaMeasurementId.trim(),
   legalUpdated: 'August 25, 2026',
   // Google Business Profile URL, linked from the footer once supplied.
-  googleBusinessProfile: '',
+  // Google's own share link for the profile. It redirects to a Google search
+  // carrying kgmid=/g/11q96w93gg, the stable Knowledge Graph id for the
+  // business. If the shortener is ever retired, this is the durable form:
+  // https://www.google.com/search?kgmid=/g/11q96w93gg
+  googleBusinessProfile: 'https://share.google/CekJqWzTnKLePG9iw',
   // Google Search Console verification. Verification method still to be
   // confirmed with Alex; a DNS TXT record needs nothing here, the HTML tag
   // method needs the token pasted below.
