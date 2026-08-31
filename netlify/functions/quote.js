@@ -89,6 +89,14 @@ export default async (req) => {
   const from = process.env.QUOTE_FROM_EMAIL;
 
   let emailed = false;
+  // Names only, never values. Enough to tell a missing variable apart from a
+  // send that Resend refused, without putting anything secret in a response.
+  const missing = [
+    !apiKey && 'RESEND_API_KEY',
+    !to && 'QUOTE_TO_EMAIL',
+    !from && 'QUOTE_FROM_EMAIL',
+  ].filter(Boolean);
+  let emailStatus = missing.length ? 'missing: ' + missing.join(', ') : '';
   if (apiKey && to && from) {
     const lines = Object.entries(record)
       .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
@@ -111,10 +119,14 @@ export default async (req) => {
       });
       if (res.ok) {
         emailed = true;
+        emailStatus = 'sent';
       } else {
-        console.error('quote: resend rejected', res.status, await res.text());
+        const detail = await res.text();
+        emailStatus = 'rejected: ' + res.status;
+        console.error('quote: resend rejected', res.status, detail);
       }
     } catch (error) {
+      emailStatus = 'send failed';
       console.error('quote: could not send email', error);
     }
   } else {
@@ -126,5 +138,5 @@ export default async (req) => {
     return bad('Unable to send your request right now.', 500);
   }
 
-  return ok({ received: true, stored, emailed });
+  return ok({ received: true, stored, emailed, emailStatus });
 };
