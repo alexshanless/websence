@@ -69,7 +69,7 @@ function HomePage() {
     <>
       <Seo
         title="Web Design Tacoma for Small Businesses | Websence"
-        description="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $3,500, live in weeks."
+        description="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $1,500, live in weeks."
         path="/"
         schema={localBusinessSchema()}
       />

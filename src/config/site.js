@@ -303,9 +303,12 @@ export const site = {
   searchConsoleToken: '',
 };
 
-// The anchor number. Derived so the hero, the tier block, and the construction
-// page can never drift apart.
-export const startingPrice = site.pricing.tiers[0].amount;
+// The anchor number shown in the sub-hero. This is the lowest published
+// price site-wide (currently the Single Page tier), not the Starter tier
+// price, so it stays correct if either amount changes independently.
+export const startingPrice = Math.min(
+  ...site.pricing.tiers.filter((tier) => tier.amount !== null).map((tier) => tier.amount)
+);
 
 // The one phone format used across the site: (564) 123-4567
 export const phoneFormat = /^\(\d{3}\) \d{3}-\d{4}$/;
