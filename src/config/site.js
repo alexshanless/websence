@@ -41,8 +41,8 @@ export const site = {
       line:
         'First point of contact for client questions and content updates after launch.',
       photo: '/assets/team/anna.jpg',
-      photoWidth: 653,
-      photoHeight: 816,
+      photoWidth: 992,
+      photoHeight: 1280,
     },
     {
       id: 'stan',
