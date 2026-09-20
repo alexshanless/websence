@@ -89,6 +89,15 @@
   margin: 0;
 }
 
+.anchorSentence {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #555;
+  max-width: 46rem;
+  margin: 2rem 0 0;
+}
+
 /* ---------- proof band ---------- */
 
 /* Sits between the intro and the slider now, which puts it inside the sticky

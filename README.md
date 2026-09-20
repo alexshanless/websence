@@ -8,10 +8,26 @@ React + Vite, deployed to Netlify at https://websencestudio.com.
 ```
 npm install
 npm run dev      # local dev server
-npm run build    # production build to dist/
+npm run build    # production build to dist/client/
 npm run preview  # serve the production build
 npm run lint
 ```
+
+## How the build works
+
+`npm run build` is three steps, and all three have to run:
+
+1. `vite build` — the browser bundle, into `dist/client`.
+2. `vite build --ssr` — `src/entry-server.jsx` into `dist/server`. Build-time
+   only; step 3 deletes it.
+3. `node scripts/prerender.mjs` — renders every route in `src/routes.js` to a
+   real HTML file in `dist/client`, plus a `404.html`.
+
+The site ships as static HTML with the page's text and head tags already in
+it, and the bundle hydrates it in the browser. That is the point: most AI
+answer-engine crawlers do not execute JavaScript, and before this they fetched
+an empty `<div id="root">` on every URL. A route added to `src/App.jsx` must
+also be added to `src/routes.js` or it ships without prerendered HTML.
 
 ## Where things live
 
@@ -22,7 +38,12 @@ changed in one place and follows everywhere.
 
 - `src/data/projects.js` — portfolio entries, and which appear where
 - `src/lib/estimate.js` — the only place the quote estimate is calculated
-- `src/lib/schema.js` — LocalBusiness schema, home page only
+- `src/lib/schema.js` — LocalBusiness (home page) and FAQPage (`/services`)
+- `src/data/faq.js` — the FAQ questions and answers, and the source of both
+  the visible copy and the FAQPage markup
+- `src/routes.js` — the routes the build prerenders
+- `src/components/Seo.jsx` — per-page head tags, rendered as plain elements
+  that React 19 hoists, so the prerender step can lift them into each file
 - `src/components/Nap.jsx` — the name/address/phone block, used everywhere it
   appears so it stays byte identical across pages
 - `netlify.toml` — build settings, redirects, cache and security headers
@@ -47,7 +68,10 @@ client and nothing is stored. Without the second, nothing is tracked.
   Enter-to-submit and email checking are implemented rather than inherited.
 - The quote estimate is always a floor, labelled "Estimated starting point"
   and never rendered without its qualifier.
-- Schema carries nothing unverifiable: no ratings, reviews, price range, or
-  opening hours.
+- Schema carries nothing unverifiable: no ratings, reviews, or opening hours.
+  `priceRange` is a floor, "From $1,500", derived from the lowest published
+  tier. It states no ceiling because the Custom tier is quoted and has none.
+- Every FAQ answer is a self-contained paragraph that names the subject and
+  states the number. An answer engine quotes a passage, not a page.
 - Placeholders are never shown to visitors. A missing photo renders a blank
   tile, a missing phone renders nothing at all.

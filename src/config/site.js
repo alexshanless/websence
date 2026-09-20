@@ -205,8 +205,14 @@ export const site = {
     // Positioned by fit, not as a way to dodge the monthly cost.
     ownershipHandoff: {
       name: 'Ownership Handoff',
-      amount: 500,
-      prefix: 'From',
+      // Free, with the old price struck through beside it. `amount: 0` is what
+      // the copy and the estimate read; `wasAmount` exists only to be crossed
+      // out, and dropping it removes the strikethrough without touching
+      // anything else.
+      amount: 0,
+      priceText: 'Free',
+      wasAmount: 500,
+      prefix: '',
       positioning:
         'Best if you have someone technical, or a developer you work with.',
       includes: [
@@ -297,6 +303,14 @@ export const site = {
   // business. If the shortener is ever retired, this is the durable form:
   // https://www.google.com/search?kgmid=/g/11q96w93gg
   googleBusinessProfile: 'https://share.google/CekJqWzTnKLePG9iw',
+  // Social and directory profiles, for LocalBusiness sameAs. This is the
+  // corroboration an answer engine looks for: the same business name, in the
+  // same town, confirmed somewhere that is not this site. Add a URL only once
+  // the profile exists and carries the same name, address, and phone as the
+  // footer NAP block — a sameAs pointing at an empty or mismatched profile is
+  // worse than none. Instagram, LinkedIn, Facebook, Yelp, and the local
+  // chamber or directory listings all belong here.
+  socialProfiles: [],
   // Google Search Console verification. Verification method still to be
   // confirmed with Alex; a DNS TXT record needs nothing here, the HTML tag
   // method needs the token pasted below.
@@ -309,6 +323,12 @@ export const site = {
 export const startingPrice = Math.min(
   ...site.pricing.tiers.filter((tier) => tier.amount !== null).map((tier) => tier.amount)
 );
+
+// The full site's entry price, as opposed to the site-wide lowest above. Used
+// where the copy names both figures in the same sentence.
+export const starterPrice = site.pricing.tiers.find(
+  (tier) => tier.id === 'starter'
+).amount;
 
 // The one phone format used across the site: (564) 123-4567
 export const phoneFormat = /^\(\d{3}\) \d{3}-\d{4}$/;

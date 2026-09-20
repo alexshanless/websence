@@ -3,15 +3,14 @@
 
 [build]
   command = "npm run build"
-  publish = "dist"
+  # The build prerenders one HTML file per route into dist/client. dist/server
+  # is a build-time artifact and is deleted before this directory is published.
+  publish = "dist/client"
   functions = "netlify/functions"
 
 [build.environment]
   # Pin the major version so a Netlify default bump cannot change the build.
   NODE_VERSION = "20"
-
-# Specific rules first: Netlify applies redirects in order, so anything below
-# the catch-all would never be reached.
 
 # Real 301 rather than the client side redirect in App.jsx, so the redirect
 # happens before any JavaScript runs and search engines see the status code.
@@ -21,45 +20,43 @@
   status = 301
   force = true
 
-# Known routes serve the app shell with a 200. They are listed one by one so
-# the catch-all below can answer unknown paths with a real 404 status; a
-# blanket /* rule made every wrong URL look like a real page to crawlers.
-[[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
-
+# Each route is now its own prerendered file. These rewrites name the file for
+# the clean URL the canonical tags and sitemap.xml use, so the mapping does not
+# depend on the host's directory-index behaviour. Status 200, not 301: the URL
+# stays as it is.
+#
+# Whatever replaces these must never point a route at the root index.html
+# again. That file is now the prerendered home page, so the old rules would
+# serve the home page's text and title on every URL on the site.
 [[redirects]]
   from = "/services"
-  to = "/index.html"
+  to = "/services/index.html"
   status = 200
 
 [[redirects]]
   from = "/work"
-  to = "/index.html"
+  to = "/work/index.html"
   status = 200
 
 [[redirects]]
   from = "/contact"
-  to = "/index.html"
+  to = "/contact/index.html"
   status = 200
 
 [[redirects]]
   from = "/privacy-policy"
-  to = "/index.html"
+  to = "/privacy-policy/index.html"
   status = 200
 
 [[redirects]]
   from = "/terms-of-service"
-  to = "/index.html"
+  to = "/terms-of-service/index.html"
   status = 200
 
-# Anything else: same shell, so the React 404 page renders, but with a 404
-# status so crawlers are told the truth.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+# Unknown paths are answered by dist/client/404.html, which Netlify serves
+# with a real 404 status automatically. It carries the prerendered NotFound
+# page, marked noindex. No catch-all rule: one pointing at index.html would
+# answer every wrong URL with the home page.
 
 # Vite fingerprints these filenames, so they can be cached indefinitely.
 [[headers]]
@@ -72,10 +69,16 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# index.html is deliberately not cached long: it carries the hashed asset
-# names, so a stale copy would keep serving an old build.
+# The HTML is deliberately not cached long: each prerendered page carries the
+# hashed asset names and its own body copy, so a stale copy would keep serving
+# an old build. One rule per shape, since every route is now its own file.
 [[headers]]
   for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
