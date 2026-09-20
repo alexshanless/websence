@@ -19,50 +19,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $1,500, live in weeks."
-    />
     <meta name="theme-color" content="#1a202c" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://websencestudio.com/" />
 
     <!--
-      Static fallbacks. The app rewrites these per route on render, but any
-      crawler that does not execute JavaScript only ever sees what is here, so
-      these must stand on their own as the home page's tags.
+      Title, description, robots, canonical, OG/Twitter tags, and the
+      LocalBusiness JSON-LD are all injected here by scripts/prerender.mjs,
+      one set per route, from what each page's <Seo> renders. This file is
+      only the template prerender.mjs starts from — it is never served as
+      the actual index.html. See src/components/Seo.jsx.
     -->
-    <meta property="og:site_name" content="WEBSENCE" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://websencestudio.com/" />
-    <meta
-      property="og:title"
-      content="Web Design Tacoma for Small Businesses | Websence"
-    />
-    <meta
-      property="og:description"
-      content="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $1,500, live in weeks."
-    />
-    <meta
-      property="og:image"
-      content="https://websencestudio.com/assets/og-default.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Website Design for Tacoma Small Businesses | Websence"
-    />
-    <meta
-      name="twitter:description"
-      content="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $1,500, live in weeks."
-    />
-    <meta
-      name="twitter:image"
-      content="https://websencestudio.com/assets/og-default.jpg"
-    />
+    <!--app-head-->
 
     <!-- Fonts are self-hosted (see src/fonts.css). Preloaded so the two
          faces start downloading with the stylesheet rather than after it. -->
@@ -80,10 +46,9 @@
       href="/fonts/roboto-variable.woff2"
       crossorigin
     />
-    <title>Web Design Tacoma for Small Businesses | Websence</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>

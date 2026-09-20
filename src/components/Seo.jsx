@@ -1,29 +1,15 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { site } from '../config/site';
 
 const OG_IMAGE = `${site.url}/assets/og-default.jpg`;
 
-function upsertMeta(key, attr, value) {
-  const selector = `meta[${attr}="${key}"]`;
-  let el = document.head.querySelector(selector);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('content', value);
-}
-
-function upsertLink(rel, href) {
-  let el = document.head.querySelector(`link[rel="${rel}"]`);
-  if (!el) {
-    el = document.createElement('link');
-    el.setAttribute('rel', rel);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('href', href);
-}
-
+// Renders through react-helmet-async rather than patching document.head
+// directly. A useEffect-based patch never runs during server rendering, so a
+// crawler that does not execute JavaScript — most AI answer-engine fetchers,
+// including ChatGPT's and Claude's — saw only the static tags baked into
+// index.html, whatever page it actually requested. Helmet collects tags
+// during render, so the prerender step (scripts/prerender.mjs) can read them
+// straight out of the render and bake per-page tags into the HTML it writes.
 function Seo({
   title,
   description,
@@ -36,57 +22,46 @@ function Seo({
   // Trailing slash on the home URL only, matching sitemap.xml exactly so the
   // canonical and the sitemap never disagree about the same page.
   const url = path === '/' ? `${site.url}/` : `${site.url}${path}`;
-  const schemaJson = schema ? JSON.stringify(schema) : '';
 
-  useEffect(() => {
-    document.title = title;
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta
+        name="robots"
+        content={
+          noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'
+        }
+      />
 
-    upsertMeta('description', 'name', description);
-    upsertMeta(
-      'robots',
-      'name',
-      noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'
-    );
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={site.name} />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
 
-    upsertMeta('og:title', 'property', title);
-    upsertMeta('og:description', 'property', description);
-    upsertMeta('og:url', 'property', url);
-    upsertMeta('og:type', 'property', 'website');
-    upsertMeta('og:site_name', 'property', site.name);
-    upsertMeta('og:locale', 'property', 'en_US');
-    upsertMeta('og:image', 'property', image);
-    upsertMeta('og:image:width', 'property', '1200');
-    upsertMeta('og:image:height', 'property', '630');
-    upsertMeta('og:image:alt', 'property', `${site.name} — ${site.tagline}`);
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-    upsertMeta('twitter:card', 'name', 'summary_large_image');
-    upsertMeta('twitter:title', 'name', title);
-    upsertMeta('twitter:description', 'name', description);
-    upsertMeta('twitter:image', 'name', image);
+      <link rel="canonical" href={url} />
 
-    upsertLink('canonical', url);
+      {/* Search Console site verification, when the HTML tag method is used. */}
+      {site.searchConsoleToken ? (
+        <meta name="google-site-verification" content={site.searchConsoleToken} />
+      ) : null}
 
-    // Search Console site verification, when the HTML tag method is used.
-    if (site.searchConsoleToken) {
-      upsertMeta('google-site-verification', 'name', site.searchConsoleToken);
-    }
-
-    const schemaId = 'page-jsonld';
-    let script = document.getElementById(schemaId);
-    if (schemaJson) {
-      if (!script) {
-        script = document.createElement('script');
-        script.id = schemaId;
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      script.textContent = schemaJson;
-    } else if (script) {
-      script.remove();
-    }
-  }, [title, description, url, schemaJson, noindex, image]);
-
-  return null;
+      {schema ? (
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      ) : null}
+    </Helmet>
+  );
 }
 
 export default Seo;
