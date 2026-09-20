@@ -20,14 +20,43 @@
   status = 301
   force = true
 
-# No route rules below this line, deliberately. Every route is now a real
-# prerendered file — /services is dist/client/services/index.html, and so on —
-# so Netlify serves each one directly. The rules that used to map these paths
-# to the root index.html would now serve the home page's text on every URL.
+# Each route is now its own prerendered file. These rewrites name the file for
+# the clean URL the canonical tags and sitemap.xml use, so the mapping does not
+# depend on the host's directory-index behaviour. Status 200, not 301: the URL
+# stays as it is.
 #
+# Whatever replaces these must never point a route at the root index.html
+# again. That file is now the prerendered home page, so the old rules would
+# serve the home page's text and title on every URL on the site.
+[[redirects]]
+  from = "/services"
+  to = "/services/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/work"
+  to = "/work/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms-of-service"
+  to = "/terms-of-service/index.html"
+  status = 200
+
 # Unknown paths are answered by dist/client/404.html, which Netlify serves
 # with a real 404 status automatically. It carries the prerendered NotFound
-# page, marked noindex.
+# page, marked noindex. No catch-all rule: one pointing at index.html would
+# answer every wrong URL with the home page.
 
 # Vite fingerprints these filenames, so they can be cached indefinitely.
 [[headers]]

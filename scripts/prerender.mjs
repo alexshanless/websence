@@ -2,8 +2,8 @@
 // (`vite build` for the browser bundle, `vite build --ssr` for the render
 // function below), turning the single index.html shell into one real HTML
 // file per route, each carrying that page's actual text and its own head
-// tags. Without this, a crawler that does not run JavaScript — which is most
-// AI answer-engine fetchers — only ever sees an empty <div id="root">.
+// tags. Without this, a crawler that does not execute JavaScript — which is
+// most AI answer-engine fetchers — only ever sees an empty <div id="root">.
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,25 +14,26 @@ const rootDir = path.dirname(fileURLToPath(import.meta.url)) + '/..';
 const clientDir = path.join(rootDir, 'dist/client');
 const template = await readFile(path.join(clientDir, 'index.html'), 'utf-8');
 
-function headTagsFor(helmet) {
-  if (!helmet) {
-    return '';
-  }
-  return [
-    helmet.title.toString(),
-    helmet.meta.toString(),
-    helmet.link.toString(),
-    helmet.script.toString(),
-  ]
-    .filter(Boolean)
-    .join('\n    ');
+// <title>, <meta> and <link> are hoistable: React moves them into <head> in
+// the browser no matter where they are rendered. renderToString has no head
+// to move them into, so it leaves them inline in the markup, and hydration
+// then fails on every page — the server put them in #root, the client expects
+// them in <head>. Moving them here is what makes the two agree.
+//
+// Text content is escaped by React, and an attribute value cannot hold a raw
+// '<', so nothing in the page copy can look like a tag to this.
+const HOISTABLE = /<title[^>]*>.*?<\/title>|<(?:meta|link)\b[^>]*\/?>/gs;
+
+function splitHoistable(markup) {
+  const head = markup.match(HOISTABLE) ?? [];
+  return { head: head.join('\n    '), body: markup.replace(HOISTABLE, '') };
 }
 
 async function renderRoute(url, outputFile) {
-  const { html, helmet } = render(url);
+  const { head, body } = splitHoistable(render(url));
   const page = template
-    .replace('<!--app-head-->', headTagsFor(helmet))
-    .replace('<!--app-html-->', html);
+    .replace('<!--app-head-->', head)
+    .replace('<!--app-html-->', body);
 
   const outputPath = path.join(clientDir, outputFile);
   await mkdir(path.dirname(outputPath), { recursive: true });

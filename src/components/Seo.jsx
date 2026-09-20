@@ -1,15 +1,21 @@
-import { Helmet } from 'react-helmet-async';
 import { site } from '../config/site';
 
 const OG_IMAGE = `${site.url}/assets/og-default.jpg`;
 
-// Renders through react-helmet-async rather than patching document.head
-// directly. A useEffect-based patch never runs during server rendering, so a
-// crawler that does not execute JavaScript — most AI answer-engine fetchers,
-// including ChatGPT's and Claude's — saw only the static tags baked into
-// index.html, whatever page it actually requested. Helmet collects tags
-// during render, so the prerender step (scripts/prerender.mjs) can read them
-// straight out of the render and bake per-page tags into the HTML it writes.
+// Plain <title>, <meta> and <link> elements, rendered in the tree. React 19
+// hoists those three into <head> itself, wherever they are rendered, so no
+// head-management library is involved and nothing is patched onto
+// document.head after the fact.
+//
+// That last part is the point. The old version wrote these tags in a
+// useEffect, which never runs for a crawler that does not execute JavaScript
+// — most AI answer-engine fetchers — so every URL served the same static tags
+// baked into index.html. Rendering them means scripts/prerender.mjs can lift
+// them out of the render and into the <head> of each prerendered file.
+//
+// The JSON-LD stays where it renders, inside the page rather than the head.
+// React does not hoist a script element, and schema.org markup is valid in
+// either place.
 function Seo({
   title,
   description,
@@ -24,7 +30,7 @@ function Seo({
   const url = path === '/' ? `${site.url}/` : `${site.url}${path}`;
 
   return (
-    <Helmet>
+    <>
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta
@@ -58,9 +64,14 @@ function Seo({
       ) : null}
 
       {schema ? (
-        <script type="application/ld+json">{JSON.stringify(schema)}</script>
+        <script
+          type="application/ld+json"
+          // Children would be escaped; the schema is generated from
+          // src/config/site.js, never from anything a visitor can type.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
       ) : null}
-    </Helmet>
+    </>
   );
 }
 
