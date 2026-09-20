@@ -32,9 +32,7 @@ export function localBusinessSchema() {
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
-    // Derived from the published tiers rather than typed, so it cannot end up
-    // claiming a band the pricing page does not show. Previously left out for
-    // want of a confirmed band; the tiers are the band.
+    // A floor, not a band. See priceRange() below.
     priceRange: priceRange(),
   };
 
@@ -61,21 +59,28 @@ export function localBusinessSchema() {
   return schema;
 }
 
-// "$1,500-$6,500". Schema.org wants text, and a real band is more use to a
-// machine reading the page than the conventional "$$".
+// "From $1,500": the lowest published price, and no top. Schema.org takes
+// free text here, so this is as valid as a band or the conventional "$$".
+//
+// It states no ceiling because there is not one. The Custom tier is quoted
+// after a call and carries no amount, so any figure derived from the tiers is
+// the top of the tiers that happen to have numbers — $6,500 — not the top of
+// the work. Publishing that as a range would put a cap in the one field an
+// answer engine quotes when asked what this studio charges.
+//
+// Do not turn this back into a range without a real ceiling to put in it.
 function priceRange() {
-  const amounts = site.pricing.tiers
-    .map((entry) => entry.amount)
-    .filter((amount) => amount !== null);
+  const lowest = Math.min(
+    ...site.pricing.tiers
+      .map((entry) => entry.amount)
+      .filter((amount) => amount !== null)
+  );
 
-  const format = (amount) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(amount);
-
-  return `${format(Math.min(...amounts))}-${format(Math.max(...amounts))}`;
+  return `From ${new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(lowest)}`;
 }
 
 // FAQPage, for the questions rendered by src/components/Faq.jsx. Google no

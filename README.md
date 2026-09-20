@@ -69,7 +69,8 @@ client and nothing is stored. Without the second, nothing is tracked.
 - The quote estimate is always a floor, labelled "Estimated starting point"
   and never rendered without its qualifier.
 - Schema carries nothing unverifiable: no ratings, reviews, or opening hours.
-  The price range is derived from the published tiers, not typed.
+  `priceRange` is a floor, "From $1,500", derived from the lowest published
+  tier. It states no ceiling because the Custom tier is quoted and has none.
 - Every FAQ answer is a self-contained paragraph that names the subject and
   states the number. An answer engine quotes a passage, not a page.
 - Placeholders are never shown to visitors. A missing photo renders a blank
