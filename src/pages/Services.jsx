@@ -1,7 +1,9 @@
 import { site } from '../config/site';
 import CtaButton from '../components/CtaButton';
+import Faq from '../components/Faq';
 import PricingTiers from '../components/PricingTiers';
 import Seo from '../components/Seo';
+import { faqSchema } from '../lib/schema';
 import page from '../components/Page.module.css';
 import styles from './Services.module.css';
 
@@ -12,6 +14,9 @@ function ServicesPage() {
         title="Website Design for Service Businesses, Tacoma | Websence"
         description="Website design packages for local service businesses in Tacoma. Published prices, a two to four week build, and a care plan that keeps the site current."
         path="/services"
+        // Every question in this schema is rendered below by <Faq />, which is
+        // the condition for marking it up at all.
+        schema={faqSchema()}
       />
       <main className={styles.services}>
         {/* Light opening band, same 1100px grid as the home page intro. */}
@@ -49,6 +54,8 @@ function ServicesPage() {
             <PricingTiers variant="dark" showAddOns showCarePlanTerms />
           </div>
         </section>
+
+        <Faq />
 
         <section className={`${page.page} ${page.light} ${styles.closing}`}>
           <div className={page.container}>

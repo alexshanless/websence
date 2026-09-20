@@ -8,4 +8,32 @@ Disallow: /preview/
 Disallow: /staging/
 Disallow: /draft/
 
+# The answer engines, named explicitly. The wildcard above already allows
+# them, but naming them means a later blanket block cannot shut them out by
+# accident, and anyone reading this file can see the decision was deliberate.
+#
+# These are one group, not eleven. A crawler obeys only the most specific
+# group that names it and ignores the wildcard entirely, so the preview rules
+# have to be repeated here or they would stop applying to exactly these bots.
+#
+# GPTBot trains, OAI-SearchBot answers in ChatGPT search, ChatGPT-User fetches
+# a page someone asked about, and the Claude, Perplexity and Apple agents
+# split the same three ways. Blocking one removes this site from that
+# surface. Do not add a Disallow below without meaning it.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /preview/
+Disallow: /staging/
+Disallow: /draft/
+
 Sitemap: https://websencestudio.com/sitemap.xml
