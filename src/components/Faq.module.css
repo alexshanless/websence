@@ -1,0 +1,70 @@
+/* Light band on the same 1100px measure as every other section, so the FAQ
+   reads as part of the page rather than a bolted-on block. */
+.faq {
+  background-color: #fff;
+  color: #1a202c;
+  padding: 110px 36px 120px;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 0 0 3rem;
+  overflow-wrap: break-word;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5rem 4rem;
+}
+
+.item {
+  margin: 0;
+  padding-top: 2rem;
+  border-top: 2px solid #1a202c;
+}
+
+.question {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0 0 1.1rem;
+  /* The question is the thing being answered, so it is allowed to be long. */
+  max-width: 28ch;
+}
+
+.answer {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #444;
+  margin: 0;
+  max-width: 42rem;
+}
+
+@media (max-width: 900px) {
+  .list {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .faq {
+    padding: 72px 20px 80px;
+  }
+
+  .heading {
+    margin-bottom: 2.25rem;
+  }
+}

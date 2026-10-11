@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { site, startingPrice } from '../config/site';
+import { site, startingPrice, starterPrice } from '../config/site';
 import { proofNames } from '../data/projects';
 import { formatPrice } from '../lib/formatPrice';
 import { localBusinessSchema } from '../lib/schema';
@@ -87,7 +87,7 @@ function HomePage() {
     <>
       <Seo
         title="Web Design Tacoma for Small Businesses | Websence"
-        description="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $3,500, live in weeks."
+        description="Custom web design in Tacoma for small businesses and trades. Sites built to bring in calls, quote requests, and booked jobs. From $1,500, live in weeks."
         path="/"
         schema={localBusinessSchema()}
       />
@@ -124,6 +124,19 @@ function HomePage() {
                   <dd className={styles.anchorValue}>{site.pricing.timeline}</dd>
                 </div>
               </dl>
+
+              {/* The same two facts as the anchor above, written out as a
+                  sentence. The anchor is a layout: a machine reading the page
+                  gets "Price" and "From $1,500" as two cells and has to infer
+                  the rest. This states it, so the page answers "how much does
+                  a website in Tacoma cost" in one quotable line. */}
+              <p className={styles.anchorSentence}>
+                A custom website from {site.legalName} in Tacoma costs{' '}
+                {formatPrice(startingPrice)} for a single page and from{' '}
+                {formatPrice(starterPrice)} for a five page site, and most sites
+                are live in two to four weeks from kickoff. The price is
+                published, not quoted after a discovery call.
+              </p>
             </div>
           </section>
           <section className={styles.proof} aria-label="Recent clients">

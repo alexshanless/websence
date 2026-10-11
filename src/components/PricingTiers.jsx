@@ -31,7 +31,21 @@ function SecondaryProduct({ product, prefix, excludesLabel, closingLine }) {
           {prefix ? (
             <span className={styles.secondaryPrefix}>{prefix}</span>
           ) : null}
-          {formatPrice(product.amount)}
+          {/* A struck-through price is a visual convention that carries no
+              meaning to a screen reader, which would read "$500 Free" as a
+              single price. The <s> is hidden from assistive tech and the
+              spoken version is spelled out instead. */}
+          {product.wasAmount ? (
+            <>
+              <s className={styles.secondaryWas} aria-hidden="true">
+                {formatPrice(product.wasAmount)}
+              </s>
+              <span className={styles.visuallyHidden}>
+                Was {formatPrice(product.wasAmount)}, now{' '}
+              </span>
+            </>
+          ) : null}
+          {product.priceText ?? formatPrice(product.amount)}
         </p>
         <p className={styles.secondaryPositioning}>{product.positioning}</p>
       </div>
