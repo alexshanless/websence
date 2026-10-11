@@ -15,7 +15,7 @@ import {
 } from 'swiper/modules';
 
 import styles from './Works.module.css';
-import { featuredProjects, getProjectMedia } from '../data/projects';
+import { proofProjects, getProjectMedia } from '../data/projects';
 import { webpSrcSet } from '../lib/responsiveImage';
 
 function numberWithZero(num) {
@@ -107,7 +107,7 @@ function Works() {
         allowTouchMove={false}
         className={styles.bgSwiper}
       >
-        {featuredProjects.map((project, index) => (
+        {proofProjects.map((project, index) => (
           <SwiperSlide key={`bg-${project.id}`} className={styles.bgSlide}>
             <img
               src={getProjectMedia(project)}
@@ -149,7 +149,7 @@ function Works() {
           prevEl: `.${styles.swiperPrev}`,
         }}
       >
-        {featuredProjects.map((project) => (
+        {proofProjects.map((project) => (
           <SwiperSlide key={`text-${project.id}`} className={styles.textSlide}>
             <h2 className={styles.slideTitleHeading}>{project.featuredTitle}</h2>
           </SwiperSlide>
@@ -167,7 +167,7 @@ function Works() {
         className={styles.thumbsSwiper}
         slideActiveClass={styles.isActive}
       >
-        {featuredProjects.map((project) => (
+        {proofProjects.map((project) => (
           <SwiperSlide key={`thumb-${project.id}`} className={styles.thumbSlide}>
             <img
               src={getProjectMedia(project)}
@@ -185,6 +185,18 @@ function Works() {
         ))}
       </Swiper>
 
+      {proofProjects[currentIndex]?.outcome ? (
+        <p className={styles.slideCaption} aria-live="polite">
+          <span className={styles.slideIndustry}>
+            {proofProjects[currentIndex].place
+              ? `${proofProjects[currentIndex].place} · `
+              : ''}
+            {proofProjects[currentIndex].industry}
+          </span>
+          {proofProjects[currentIndex].outcome}
+        </p>
+      ) : null}
+
       <div className={styles.swiperControls}>
         <div className={styles.slideNumber}>
           <span className={styles.swiperNumberCurrent}>
@@ -192,7 +204,7 @@ function Works() {
           </span>
           /
           <span className={styles.swiperNumberTotal}>
-            {numberWithZero(featuredProjects.length)}
+            {numberWithZero(proofProjects.length)}
           </span>
         </div>
         <div className={styles.navButtonsContainer}>

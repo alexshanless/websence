@@ -1,6 +1,5 @@
-import { site } from '../config/site';
-import CtaButton from '../components/CtaButton';
 import PricingTiers from '../components/PricingTiers';
+import QuoteActions from '../components/QuoteActions';
 import Seo from '../components/Seo';
 import page from '../components/Page.module.css';
 import styles from './Services.module.css';
@@ -58,11 +57,7 @@ function ServicesPage() {
                   Tell me what you want the phone to do
                 </h2>
               </div>
-              <div className={page.ctaRow}>
-                <CtaButton to="/contact" variant="dark">
-                  {site.ctaLabel}
-                </CtaButton>
-              </div>
+              <QuoteActions />
             </div>
           </div>
         </section>

@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.5rem;
+  align-items: center;
+}
+
+.linkOnLight,
+.linkOnDark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 3px;
+}
+
+.linkOnLight {
+  color: #1a202c;
+}
+
+.linkOnDark {
+  color: #fff;
+}
+
+.linkOnLight:hover,
+.linkOnDark:hover {
+  opacity: 0.7;
+}
+
+.linkOnLight:focus-visible,
+.linkOnDark:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

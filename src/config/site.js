@@ -41,8 +41,8 @@ export const site = {
       line:
         'First point of contact for client questions and content updates after launch.',
       photo: '/assets/team/anna.jpg',
-      photoWidth: 653,
-      photoHeight: 816,
+      photoWidth: 992,
+      photoHeight: 1280,
     },
     {
       id: 'stan',
@@ -288,6 +288,9 @@ export const site = {
       'This is a starting estimate. Final pricing depends on scope, and we confirm it on a call before anything is committed.',
   },
   ctaLabel: 'Get a quote',
+  // Total businesses built for, as stated by Alex. The work page lists only
+  // the ones with something to show, so this is larger than that list.
+  clientCount: '40+',
   contactFormEndpoint: contactFormEndpoint.trim(),
   gaMeasurementId: gaMeasurementId.trim(),
   legalUpdated: 'August 25, 2026',

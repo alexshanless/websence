@@ -10,7 +10,7 @@ if (import.meta.env.DEV && site.phone && !phoneFormat.test(site.phone)) {
 
 // Until the 564 line is supplied, this renders a marked placeholder instead of a
 // number, so nothing fake ships and there is no dead click to call link.
-function PhoneLink({ className }) {
+function PhoneLink({ className, prefix }) {
   // Nothing renders until the number exists. A visible "coming soon" reads
   // as an unfinished site; an absent line is simply not noticed.
   if (!site.phone) {
@@ -23,7 +23,7 @@ function PhoneLink({ className }) {
       className={className}
       onClick={trackClickToCall}
     >
-      {site.phone}
+      {prefix ? `${prefix} ${site.phone}` : site.phone}
     </a>
   );
 }

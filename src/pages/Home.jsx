@@ -4,13 +4,14 @@ import { site, startingPrice } from '../config/site';
 import { proofNames } from '../data/projects';
 import { formatPrice } from '../lib/formatPrice';
 import { localBusinessSchema } from '../lib/schema';
-import CtaButton from '../components/CtaButton';
 import ClientMarquee from '../components/ClientMarquee';
 import PricingTiers from '../components/PricingTiers';
 import Hero from '../components/Hero';
 import ProjectImage from '../components/ProjectImage';
+import QuoteActions from '../components/QuoteActions';
 import Seo from '../components/Seo';
 import Works from '../components/Works';
+import page from '../components/Page.module.css';
 import styles from './Home.module.css';
 
 const outcomes = [
@@ -33,6 +34,23 @@ const outcomes = [
     id: '04',
     title: 'Proof on the page',
     body: 'Your finished jobs, sitting right next to the button that starts the next one.',
+  },
+];
+
+// Every line here is backed by something already on the site: the published
+// tiers, the timeline, and the Care Plan hosting terms.
+const trustPoints = [
+  {
+    title: 'Published prices',
+    body: 'The numbers on this page are the real ones. The quote form uses the same ones, and you get a price before anything gets built.',
+  },
+  {
+    title: 'A date, not a guess',
+    body: `${site.pricing.timeline} ${site.pricing.timelineQualifier}`,
+  },
+  {
+    title: 'Your name on it',
+    body: site.pricing.carePlan.hosting,
   },
 ];
 
@@ -89,11 +107,7 @@ function HomePage() {
                     Custom sites that bring in calls, quote requests, and booked
                     jobs. Built in Tacoma by someone who answers the phone.
                   </p>
-                  <div className={styles.introCta}>
-                    <CtaButton to="/contact" variant="dark">
-                      {site.ctaLabel}
-                    </CtaButton>
-                  </div>
+                  <QuoteActions />
                 </div>
               </div>
 
@@ -134,41 +148,8 @@ function HomePage() {
 
         </div>
 
-      <section className={styles.studio} aria-labelledby="studio-heading">
-        <div className={styles.studioInner}>
-          <h2 id="studio-heading" className={styles.studioHeading}>
-            The whole company is on this page
-          </h2>
-          <p className={styles.studioLead}>
-            You work with me directly, start to finish. No handoffs, no account
-            manager you have never met.
-          </p>
-          <ul className={styles.teamGrid}>
-            {site.team.map((member) => (
-              <li key={member.id} className={styles.teamCard}>
-                <div className={styles.teamPhotoWrap}>
-                  <ProjectImage
-                    src={member.photo}
-                    alt={
-                      member.photo
-                        ? `${member.name}, ${member.role}`
-                        : `Photo of ${member.name} coming soon`
-                    }
-                    className={styles.teamPhoto}
-                    width={member.photoWidth}
-                    height={member.photoHeight}
-                    silentFallback
-                  />
-                </div>
-                <h3 className={styles.teamName}>{member.name}</h3>
-                <p className={styles.teamRole}>{member.role}</p>
-                <p className={styles.teamLine}>{member.line}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
+      {/* Pitch and pricing come before the team. The price is the deciding
+          fact for this buyer, so it is not held behind who is on the team. */}
       <section className={styles.pitch}>
         <div className={styles.pitchInner}>
           <div className={styles.pitchHead}>
@@ -208,14 +189,95 @@ function HomePage() {
                 at a time, so yours is the one I am working on.
               </p>
             </div>
-            <div className={styles.ctaRow}>
-              <CtaButton to="/contact" variant="light">
-                {site.ctaLabel}
-              </CtaButton>
+            <QuoteActions tone="onDark">
               <Link to="/work" className={styles.secondaryLink}>
                 See work
               </Link>
+            </QuoteActions>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.studio} aria-labelledby="studio-heading">
+        <div className={styles.studioInner}>
+          <h2 id="studio-heading" className={styles.studioHeading}>
+            The whole company is on this page
+          </h2>
+          <p className={styles.studioLead}>
+            You work with me directly, start to finish. No handoffs, no account
+            manager you have never met.
+          </p>
+          <ul className={styles.teamGrid}>
+            {site.team.map((member) => (
+              <li key={member.id} className={styles.teamCard}>
+                <div className={styles.teamPhotoWrap}>
+                  <ProjectImage
+                    src={member.photo}
+                    alt={
+                      member.photo
+                        ? `${member.name}, ${member.role}`
+                        : `Photo of ${member.name} coming soon`
+                    }
+                    className={styles.teamPhoto}
+                    width={member.photoWidth}
+                    height={member.photoHeight}
+                    silentFallback
+                  />
+                </div>
+                <h3 className={styles.teamName}>{member.name}</h3>
+                <p className={styles.teamRole}>{member.role}</p>
+                <p className={styles.teamLine}>{member.line}</p>
+              </li>
+            ))}
+          </ul>
+
+          {/* Trust, stated as facts that are true today. No reviews, ratings,
+              or client quotes until there are real ones to show. */}
+          <section className={styles.trust} aria-labelledby="trust-heading">
+            <h2 id="trust-heading" className={styles.trustHeading}>
+              What you can count on
+            </h2>
+            <dl className={styles.trustGrid}>
+              {trustPoints.map((point) => (
+                <div key={point.title} className={styles.trustItem}>
+                  <dt className={styles.trustTitle}>{point.title}</dt>
+                  <dd className={styles.trustBody}>{point.body}</dd>
+                </div>
+              ))}
+              <div className={styles.trustItem}>
+                <dt className={styles.trustTitle}>Based in Tacoma</dt>
+                <dd className={styles.trustBody}>
+                  {site.serviceAreaLine}.{' '}
+                  <a
+                    href={site.googleBusinessProfile}
+                    className={styles.trustLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Websence on Google
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </section>
+
+          {/* The page used to end on the pricing closer. With the team last,
+              it still ends on a way to start. */}
+          <div className={page.ctaBand}>
+            <div>
+              <h2 className={page.ctaBandTitle}>
+                Tell me about the business
+              </h2>
+              {/* Local first, then the reach. Both ends are on the work page. */}
+              <p className={page.priceNote}>
+                Sites built for {site.clientCount} businesses, from Tacoma and
+                Seattle to the UK and Australia.{' '}
+                <Link to="/work" className={page.inlineLink}>
+                  See the work
+                </Link>
+              </p>
             </div>
+            <QuoteActions />
           </div>
         </div>
       </section>

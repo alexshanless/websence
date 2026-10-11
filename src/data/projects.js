@@ -1,5 +1,9 @@
 // BuildCore is a private, pre-launch client product. It must not appear here,
 // on any services page, or as an example anywhere on the site.
+//
+// `place` is where the client is. "Local" is reserved for the studio's own
+// market; everything else is named plainly, so no out-of-area client reads as
+// a Tacoma one.
 
 export const projects = [
   {
@@ -10,13 +14,12 @@ export const projects = [
     name: 'JNA Group',
     featuredTitle: 'JNA',
     industry: 'structural engineering consultancy',
+    place: 'Australia',
     outcome:
       'A site that shows their structural consulting work to homeowners and businesses.',
     image: '/assets/projects/jna.jpg',
     slideImage: '/assets/screenshots/JNA-slide.jpg',
     link: 'https://www.jnagroup.net.au/',
-    featured: true,
-    featuredOrder: 1,
     marquee: true,
     workOrder: 4,
   },
@@ -28,12 +31,11 @@ export const projects = [
     name: 'EMBR Solar',
     featuredTitle: 'EMBR',
     industry: 'residential solar',
+    place: 'California',
     outcome: 'A solar company site that puts the offer and next step up front.',
     image: '/assets/projects/embr.jpg',
     slideImage: '/assets/screenshots/embr-slider.jpg',
     link: 'https://www.embrsolar.com/',
-    featured: true,
-    featuredOrder: 2,
     marquee: true,
   },
   {
@@ -42,13 +44,12 @@ export const projects = [
     name: 'C.S. Media',
     featuredTitle: 'CS MEDIA',
     industry: 'marketing and creative agency',
+    place: 'California',
     outcome:
       'A marketing studio site that explains the process in plain language.',
     image: '/assets/projects/cs-media.jpg',
     slideImage: '/assets/screenshots/c.smedia-slide.jpg',
     link: 'https://www.csmediaoc.com/',
-    featured: true,
-    featuredOrder: 4,
     marquee: true,
   },
   {
@@ -59,13 +60,14 @@ export const projects = [
     name: 'Marjorie',
     featuredTitle: 'MARJORIE',
     industry: 'restaurant',
+    place: 'Seattle',
     outcome:
       'A restaurant site built around the brand and local search, with reservations one tap away.',
     image: '/assets/projects/marjorie.jpg',
     slideImage: '/assets/screenshots/marjorie-slide.jpg',
     link: 'https://www.marjorierestaurant.com/',
     marquee: true,
-    workOrder: 3,
+    workOrder: 2,
   },
   {
     id: 'lustre',
@@ -75,12 +77,13 @@ export const projects = [
     name: 'Lustre',
     featuredTitle: 'LUSTRE',
     industry: 'infrared sauna wellness studio',
+    place: 'Local',
     outcome: 'A studio site for infrared sauna and recovery services.',
     image: '/assets/projects/lustre.jpg',
     slideImage: '/assets/screenshots/lustre-slide.jpg',
     link: 'https://www.lustreinfraredsauna.com/',
     marquee: true,
-    workOrder: 2,
+    workOrder: 1,
   },
   {
     id: 'musclebees',
@@ -90,6 +93,7 @@ export const projects = [
     name: 'Muscle Bees',
     featuredTitle: 'MUSCLE BEES',
     industry: 'sports nutrition ecommerce',
+    place: 'UK',
     outcome:
       'An online store for a sports nutrition retailer, built to move people to checkout.',
     image: '',
@@ -104,12 +108,13 @@ export const projects = [
     name: 'The Fowl Drake',
     featuredTitle: 'FOWL DRAKE',
     industry: 'waterfowl guide service and shop',
-    outcome: 'A Wisconsin guide service and gear shop running on one site.',
+    place: 'Wisconsin',
+    outcome: 'A guide service and gear shop running on one site.',
     image: '',
     slideImage: '/assets/screenshots/fowldrake-slide.jpg',
     link: 'https://fowldrake.com/',
     marquee: true,
-    workOrder: 1,
+    workOrder: 3,
   },
   {
     id: 'beyondtheguidebook',
@@ -119,6 +124,7 @@ export const projects = [
     name: 'Beyond the Guidebook',
     featuredTitle: 'BEYOND THE GUIDEBOOK',
     industry: 'small group travel and bookings',
+    place: 'US',
     outcome: 'A travel company site for small group tours.',
     image: '',
     slideImage: '/assets/screenshots/beyondtheguidebook-slide.jpg',
@@ -131,6 +137,7 @@ export const projects = [
     name: 'Heven',
     featuredTitle: 'HEVEN',
     industry: 'SMB advisory and investment',
+    place: 'Australia',
     outcome:
       'An advisory and investment firm site aimed at small businesses ready to scale.',
     image: '',
@@ -144,8 +151,9 @@ export const projects = [
     name: 'NordStar Freight',
     featuredTitle: 'NORDSTAR',
     industry: 'freight and trucking',
+    place: 'Minneapolis',
     outcome:
-      'A Minneapolis freight carrier, built around lane quotes and driver recruitment.',
+      'A freight carrier site built around lane quotes and driver recruitment.',
     image: '',
     slideImage: '/assets/screenshots/nordstar-slide.jpg',
     link: 'https://nordstarfreightmn.com/',
@@ -188,13 +196,17 @@ export const archiveProjects = [
   { id: 'robadamson', name: 'Rob Adamson', industry: 'artist portfolio' },
 ];
 
-// The home page slider. Separate from /work, and unchanged by follow up 9.
-export const featuredProjects = projects
-  .filter((project) => project.featured)
-  .sort((a, b) => a.featuredOrder - b.featuredOrder);
+// Home page slider. Lustre and Marjorie lead. Lustre is local to the studio.
+// Marjorie is a Seattle restaurant. The rest are work from elsewhere.
+const proofIds = ['lustre', 'marjorie', 'fowldrake', 'nordstar', 'embr'];
 
-// Part 1 of /work, in the order Alex specified. Blur was dropped: it was never
-// launched, so there is nothing to show and nothing to link.
+export const proofProjects = proofIds.flatMap((id) => {
+  const project = projects.find((item) => item.id === id);
+  return project ? [project] : [];
+});
+
+// Part 1 of /work. Lustre leads, then Marjorie. Blur was
+// dropped: it was never launched, so there is nothing to show and nothing to link.
 export const workFeatured = projects
   .filter((project) => typeof project.workOrder === 'number')
   .sort((a, b) => a.workOrder - b.workOrder);
