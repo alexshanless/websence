@@ -6,10 +6,10 @@
     z-index: 1;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    /* Bottom padding keeps the offer above the floating nav pill. */
+    padding: 20px 20px 96px;
     background-color: #ffffff;
     overflow: hidden;
     background-image: url('https://cdn.prod.website-files.com/65386cac3f64810eb31ba215/65545832d5790dae98f8bf0a_Ellipse%206.png');
@@ -18,9 +18,37 @@
     background-size: cover;
   }
 
+  .lockupArea {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Room for the annotations, which hang outside the word. */
+    padding: 3rem 0;
+  }
+
   .contentWrapper {
     position: relative;
     text-align: center;
+  }
+
+  /* Same 1100px grid as the intro below, so the two left edges line up. */
+  .offer {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2.5rem;
+  }
+
+  .offerLine {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #1a202c;
+    margin: 0;
   }
 
   .mainHeadline {
@@ -73,7 +101,8 @@
      asked for 20vw with a 3rem floor and overflowed the screen. */
   @media (max-width: 600px) {
     .heroContainer {
-      padding: 12px;
+      /* No nav pill on mobile, so the offer can sit near the bottom edge. */
+      padding: 12px 12px 28px;
       /* Small viewport height, so mobile browser chrome cannot clip it. */
       min-height: 100svh;
     }
@@ -93,5 +122,17 @@
 
     .annotationBelow {
       transform: translate(0, calc(100% + 8px));
+    }
+
+    /* Stacks, left aligned. */
+    .offer {
+      width: calc(100% - 16px);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .offerLine {
+      font-size: 1rem;
     }
   }

@@ -4,7 +4,7 @@
   background-color: #111; 
   padding: 0; 
   position: relative; 
-  z-index: 2; /* Higher z-index than the Hero section */
+  z-index: 2;
   min-height: 100vh; /* Full viewport height */
   height: 100vh;
   width: 100%; /* Full width */
@@ -34,7 +34,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover; /* Cover the slide area */
- 
+}
+
+/* The screenshots are mostly light, and the type over them is white. A
+   darkening layer across the whole slide, heavier at the bottom where the
+   caption and controls sit, so the type reads on every slide. */
+.bgSwiper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
 }
 
 /* --- Titles Slider --- */
@@ -61,7 +77,7 @@
   text-transform: uppercase;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.55);
   margin: 0;
   padding: 0 30px;
   white-space: nowrap;
@@ -73,6 +89,7 @@
   color: #fff;
   -webkit-text-fill-color: #fff;
   -webkit-text-stroke: 0px transparent;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 :global(.swiper-button-next)::after,
 :global(.swiper-button-prev)::after {
@@ -117,6 +134,32 @@
   object-fit: cover;
 }
 
+
+/* Sits under the active title. Plain text on the darkened image, no box. */
+.slideCaption {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: calc(50% + 6rem);
+  transform: translateX(-50%);
+  width: min(34rem, calc(100% - 48px));
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+
+.slideIndustry {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
 
 /* --- Controls / Slide Numbers --- */
 .swiperControls {
@@ -226,6 +269,16 @@
      what prev/next already does. */
   .thumbsSwiper {
     display: none;
+  }
+
+  .slideCaption {
+    position: static;
+    transform: none;
+    width: auto;
+    margin: 4px 20px 0;
+    padding: 0;
+    background: transparent;
+    text-align: center;
   }
 
   .swiperControls {

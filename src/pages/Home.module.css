@@ -49,10 +49,6 @@
   margin: 0;
 }
 
-.introCta {
-  display: flex;
-}
-
 /* Price and timeline as a stated fact, not a caption. */
 .anchor {
   margin: 0;
@@ -264,6 +260,63 @@
   margin: 0;
 }
 
+/* ---------- trust (inside the studio section, after the team) ---------- */
+
+.trust {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid #ddd;
+}
+
+.trustHeading {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #1a202c;
+  margin: 0 0 2.5rem;
+}
+
+.trustGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+}
+
+.trustItem {
+  min-width: 0;
+}
+
+.trustTitle {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: #1a202c;
+  margin: 0 0 0.75rem;
+}
+
+.trustBody {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #444;
+  margin: 0;
+}
+
+.trustLink {
+  color: #1a202c;
+  text-decoration: none;
+  border-bottom: 2px solid #1a202c;
+  padding-bottom: 1px;
+}
+
+.trustLink:hover {
+  color: #666;
+  border-bottom-color: #666;
+}
+
 /* ---------- pitch (black) ---------- */
 
 .pitch {
@@ -386,13 +439,6 @@
   max-width: 26rem;
 }
 
-.ctaRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: center;
-}
-
 .secondaryLink {
   /* 24px minimum tap target. */
   display: inline-flex;
@@ -440,6 +486,10 @@
     gap: 2rem;
   }
 
+  .trustGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .outcomeGrid {
     grid-template-columns: 1fr;
   }
@@ -465,6 +515,11 @@
     grid-template-columns: 1fr;
     gap: 2.5rem;
     max-width: 320px;
+  }
+
+  .trustGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .pitch {

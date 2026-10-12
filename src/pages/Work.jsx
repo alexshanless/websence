@@ -3,9 +3,8 @@ import {
   archiveProjects,
   getProjectMedia,
 } from '../data/projects';
-import { site } from '../config/site';
-import CtaButton from '../components/CtaButton';
 import ProjectImage from '../components/ProjectImage';
+import QuoteActions from '../components/QuoteActions';
 import Seo from '../components/Seo';
 import page from '../components/Page.module.css';
 import styles from './Work.module.css';
@@ -16,7 +15,8 @@ function WorkPage() {
       <Seo
         title="Web Design Work | Websence, Tacoma WA"
         description="Recent websites built by a web designer in Tacoma WA, for a guide service, a sauna studio, a restaurant, an engineering firm, and an online store."
-        path="/work"
+        path="/work"
+
       />
       <main className={`${page.page} ${page.light}`}>
         <div className={page.container}>
@@ -42,6 +42,7 @@ function WorkPage() {
                   <div className={styles.cardBody}>
                     <span className={styles.index}>
                       {String(index + 1).padStart(2, '0')}
+                      {project.place ? ` · ${project.place}` : ''}
                     </span>
                     <h2 className={styles.name}>{project.name}</h2>
                     {project.outcome ? (
@@ -106,11 +107,7 @@ function WorkPage() {
                 Tell me the trade and the jobs you want more of.
               </p>
             </div>
-            <div className={page.ctaRow}>
-              <CtaButton to="/contact" variant="dark">
-                {site.ctaLabel}
-              </CtaButton>
-            </div>
+            <QuoteActions />
           </div>
         </div>
       </main>
